@@ -1,6 +1,6 @@
 import React from 'react';
-import UserListScreen from './screens/UserListScreen';
+import AppNavigator from './navigation/AppNavigator';
 
 export default function App() {
-  return <UserListScreen/>;
+  return <AppNavigator />;
 }
