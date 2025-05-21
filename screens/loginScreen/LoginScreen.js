@@ -14,16 +14,19 @@ import LoginForm from './LoginForm';
 export default function LoginScreen({ navigation }) {
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 20}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
-          contentContainerStyle={styles.container}
+          contentContainerStyle={styles.scrollContainer}
           keyboardShouldPersistTaps="handled"
         >
-          <Logo />
-          <LoginForm navigation={navigation} />
+          <View style={styles.inner}>
+            <Logo />
+            <LoginForm navigation={navigation} />
+          </View>
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -34,8 +37,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFF5E0',
+  },
+  scrollContainer: {
+    flexGrow: 1,
+  },
+  inner: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    paddingBottom: 40,
   },
 });

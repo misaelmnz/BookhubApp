@@ -52,7 +52,7 @@ export default function LoginForm({ navigation }) {
       <Button title="Entrar" onPress={handleLogin} color='#ff9e40' />
       <View style={styles.registerContainer}>
         <Text>Não possui conta? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('tela_cadastro')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
           <Text style={styles.registerLink}>Cadastre-se! </Text>
         </TouchableOpacity>
       </View>
