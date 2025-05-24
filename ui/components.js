@@ -11,6 +11,7 @@ export const root = {
     C_BLACK: '#040111',
     C_WHITE: '#FFFFFF',
     C_FONT: '"Inter-Regular"',
+    C_MARGEM_HORIZONTAL: 20,
 }
 
 export function Container({
