@@ -30,11 +30,8 @@ export default function LoginScreen({ navigation }) {
               alignItems: 'center',
               flex: 1,
             }}
-            padding={0}
-            margin={0}
-            borderRadius={0}
             backgroundColor={root.C_BACKGROUND_COLOR}
-            paddingHorizontal={20}
+            paddingHorizontal={root.C_MARGEM_HORIZONTAL}
             paddingBottom={40}
           >
             <Logo />
