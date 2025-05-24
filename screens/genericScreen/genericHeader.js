@@ -1,7 +1,7 @@
 // NÃO ESQUECER DE COLOCAR A IMAGEM
 
 import { View, StyleSheet, SafeAreaView, Image } from 'react-native';
-import {root} from '../../theme/theme';
+import {root} from '../../ui/components';
 
 export default function FooterDefault() {
   return (

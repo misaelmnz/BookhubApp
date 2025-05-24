@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, View, StyleSheet } from 'react-native';
-import { root } from '../../theme/theme';
+import { root } from '../../ui/components';
 import SearchBar from '../genericScreen/searchbar';
 
 export default function FeedIntro() {
