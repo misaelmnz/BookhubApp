@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  View,
   StyleSheet,
   KeyboardAvoidingView,
   ScrollView,
@@ -10,6 +9,7 @@ import {
 } from 'react-native';
 import Logo from './Logo';
 import LoginForm from './LoginForm';
+import { Container, root } from '../../ui/components';
 
 export default function LoginScreen({ navigation }) {
   return (
@@ -23,10 +23,22 @@ export default function LoginScreen({ navigation }) {
           contentContainerStyle={styles.scrollContainer}
           keyboardShouldPersistTaps="handled"
         >
-          <View style={styles.inner}>
+          <Container
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              flex: 1,
+            }}
+            padding={0}
+            margin={0}
+            borderRadius={0}
+            backgroundColor={root.C_BACKGROUND_COLOR}
+            paddingHorizontal={20}
+            paddingBottom={40}
+          >
             <Logo />
             <LoginForm navigation={navigation} />
-          </View>
+          </Container>
         </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -36,16 +48,9 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF5E0',
+    backgroundColor: root.C_BACKGROUND_COLOR,
   },
   scrollContainer: {
     flexGrow: 1,
-  },
-  inner: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingBottom: 40,
   },
 });

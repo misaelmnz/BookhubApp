@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { root } from '../../theme/theme';
+import { root } from '../../ui/components';
 
 export default function Logo() {
   return (
