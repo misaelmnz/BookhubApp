@@ -15,7 +15,7 @@ export default function LoginForm({ navigation }) {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://192.168.15.13:3000/login', {
+      const response = await fetch('http://192.168.0.2:3000/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ usuario, senha }),
@@ -24,12 +24,13 @@ export default function LoginForm({ navigation }) {
       const data = await response.json();
 
       if (data.success) {
-        navigation.navigate('Sucesso');
+        navigation.navigate('Feed');
       } else {
         Alert.alert('Erro', 'Usuário não localizado ou dados incorretos.');
       }
     } catch (error) {
       Alert.alert('Erro', 'Erro ao conectar com o servidor.');
+      console.log(error);
     }
   };
 

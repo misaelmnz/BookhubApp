@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import { root } from '../../theme/theme';
 
 export default function Logo() {
   return (
@@ -14,9 +15,10 @@ const styles = StyleSheet.create({
   container: { alignItems: 'center', marginBottom: 40 },
   logo: { width: 100, height: 100, resizeMode: 'contain' },
   appName: {
+    fontFamily: root.C_FONT,
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#0C356A',
+    color: root.C_BLACK,
     marginTop: 10,
   },
 });
