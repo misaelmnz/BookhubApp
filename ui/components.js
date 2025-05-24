@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { Text, TouchableOpacity, Image } from 'react-native';
 
 export const root = {
     C_BACKGROUND_COLOR: '#FFF8E7',
@@ -12,7 +13,7 @@ export const root = {
     C_FONT: '"Inter-Regular"',
 }
 
-export default function Container({
+export function Container({
     children,
     style,
     backgroundColor = root.C_BACKGROUND_COLOR,

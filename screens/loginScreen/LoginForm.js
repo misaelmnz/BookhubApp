@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import {
   View,
   TextInput,
-  Text,
-  Button,
   StyleSheet,
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import { Container, TextCustom, ButtonCustom, root } from '../../ui/components';
 
 export default function LoginForm({ navigation }) {
   const [usuario, setUsuario] = useState('');
@@ -35,7 +34,7 @@ export default function LoginForm({ navigation }) {
   };
 
   return (
-    <View style={styles.form}>
+    <Container style={styles.form}>
       <TextInput
         style={styles.input}
         placeholder="E-mail ou Celular (Ex: 11999999999)"
@@ -50,14 +49,18 @@ export default function LoginForm({ navigation }) {
         value={senha}
         onChangeText={setSenha}
       />
-      <Button title="Entrar" onPress={handleLogin} color='#ff9e40' />
+      <ButtonCustom onPress={handleLogin} style={styles.button}>
+        <TextCustom color={root.C_WHITE} fontWeight="bold" textAlign="center">
+          Entrar
+        </TextCustom>
+      </ButtonCustom>
       <View style={styles.registerContainer}>
-        <Text>Não possui conta? </Text>
+        <TextCustom>Não possui conta? </TextCustom>
         <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-          <Text style={styles.registerLink}>Cadastre-se! </Text>
+          <TextCustom style={styles.registerLink}>Cadastre-se! </TextCustom>
         </TouchableOpacity>
       </View>
-    </View>
+    </Container>
   );
 }
 
@@ -70,6 +73,12 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     marginBottom: 12,
+  },
+  button: {
+    marginTop: 8,
+    marginBottom: 8,
+    backgroundColor: root.C_MAIN_COLOR,
+    borderRadius: 8,
   },
   registerContainer: {
     flexDirection: 'row',
