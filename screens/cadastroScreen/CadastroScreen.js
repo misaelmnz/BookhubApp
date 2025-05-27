@@ -53,7 +53,7 @@ export default function CadastroScreen({ navigation }) {
     const nomeFormatado = formatarNome(form.nome.trim());
     const sobrenomeFormatado = formatarNome(form.sobrenome.trim());
 
-    const regexNome = /^[A-Za-zÀ-ú\s]{1,20}$/;
+    const regexNome = /^[A-Za-z\s]{1,20}$/;
     if (!regexNome.test(nomeFormatado)) erros.nome = 'Nome inválido.';
     if (!regexNome.test(sobrenomeFormatado)) erros.sobrenome = 'Sobrenome inválido.';
 

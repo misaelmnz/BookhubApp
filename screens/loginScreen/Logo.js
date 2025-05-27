@@ -1,24 +1,32 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import { root } from '../../ui/components';
+import { View, Image, StyleSheet } from 'react-native';
+import { root, TextCustom, Container } from '../../ui/components';
 
 export default function Logo() {
   return (
-    <View style={styles.container}>
+    <Container
+    alignItems="center"
+    marginBottom={40}
+    >
       <Image source={require('../../assets/logo.png')} style={styles.logo} />
-      <Text style={styles.appName}>Bookhub</Text>
-    </View>
+      <TextCustom
+        fontSize={28}
+        fontWeight="bold"
+        color={root.C_BLACK}
+        textAlign="center"
+        fontFamily={root.C_FONT}
+        style={styles.appName}
+      >
+        Bookhub
+      </TextCustom>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { alignItems: 'center', marginBottom: 40 },
   logo: { width: 100, height: 100, resizeMode: 'contain' },
   appName: {
     fontFamily: root.C_FONT,
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: root.C_BLACK,
     marginTop: 10,
   },
 });

@@ -29,10 +29,8 @@ export default function LoginScreen({ navigation }) {
               justifyContent: 'center',
               alignItems: 'center',
               flex: 1,
-            }}
-            backgroundColor={root.C_BACKGROUND_COLOR}
-            paddingHorizontal={root.C_MARGEM_HORIZONTAL}
-            paddingBottom={40}
+              paddingHorizontal: 20,
+            }}  
           >
             <Logo />
             <LoginForm navigation={navigation} />

@@ -5,15 +5,16 @@ import LoginScreen from '../screens/loginScreen/LoginScreen';
 import Sucesso from '../screens/loginScreen/Sucesso';
 import CadastroScreen from '../screens/cadastroScreen/CadastroScreen';
 import FeedScreen from '../screens/storeScreen/FeedScreen';
+import ItemCard from '../screens/storeScreen/ItemCard';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Navigator initialRouteName="Feed">
         <Stack.Screen name="Feed" component={FeedScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Sucesso" component={Sucesso} />
         <Stack.Screen name="Cadastro" component={CadastroScreen} options={{ headerShown: false }} />
       </Stack.Navigator>

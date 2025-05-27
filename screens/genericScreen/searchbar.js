@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, Alert } from 'react-native';
 
 import { root } from '../../ui/components';
 
-export default function SearchBar({ placeholder, onChangeText, style }) {
+export default function SearchBar({ placeholder, onChangeText, style, editable, redirect}) {
+
     return (
         <View style={[styles.container, style]}>
             <TextInput
@@ -12,6 +13,7 @@ export default function SearchBar({ placeholder, onChangeText, style }) {
                 placeholder={placeholder}
                 placeholderTextColor={root.C_GRAY}
                 onChangeText={onChangeText}
+                editable={editable}
             />
         </View>
     );
@@ -24,7 +26,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 5,
         marginVertical: 10,
-        marginHorizontal: 20,
+        marginHorizontal: 5,
         borderColor: root.C_SUB_COLOR,
         borderWidth: 1,
     },

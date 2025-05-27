@@ -10,7 +10,11 @@ export default function FeedIntro() {
         source={require('../../assets/Group 13(1).png')}
         style={styles.image}
       />
-      <SearchBar style={styles.SearchBar}placeholder={"Buscar"}/>
+      <SearchBar
+       style={styles.SearchBar}
+       placeholder={"Buscar"}
+       editable={false}
+      />
     </View>
   ); 
 }

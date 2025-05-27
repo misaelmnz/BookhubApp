@@ -10,31 +10,46 @@ export const root = {
     C_PURPLE: '#A193E0',
     C_BLACK: '#040111',
     C_WHITE: '#FFFFFF',
-    C_FONT: '"Inter-Regular"',
+    C_FONT_LIST: {
+        Black: 'Inter-Black',
+        BlackItalic: 'Inter-BlackItalic',
+        Bold: 'Inter-Bold',
+        BoldItalic: 'Inter-BoldItalic',
+        ExtraBold: 'Inter-ExtraBold',
+        ExtraBoldItalic: 'Inter-ExtraBoldItalic',
+        ExtraLight: 'Inter-ExtraLig ht',
+        ExtraLightItalic: 'Inter-ExtraLightItalic',
+        Italic: 'Inter-Italic',
+        Light: 'Inter-Light',
+        LightItalic: 'Inter-LightItalic',
+        Medium: 'Inter-Medium',
+        MediumItalic: 'Inter-MediumItalic',
+        Regular: 'Inter-Regular',
+        SemiBold: 'Inter-SemiBold',
+        SemiBoldItalic: 'Inter-SemiBoldItalic',
+        Thin: 'Inter-Thin',
+        ThinItalic: 'Inter-ThinItalic',
+    },
     C_MARGEM_HORIZONTAL: 20,
 }
 
 export function Container({
-    children,
-    style,
-    backgroundColor = root.C_BACKGROUND_COLOR,
-    padding = 0,
-    margin = 0,
-    borderRadius = 0,
+  children,
+  style = {},
+  backgroundColor = root.C_BACKGROUND_COLOR,
+  ...restStyleProps 
 }) {
-    return (
-        <View
-            style={{
-                backgroundColor: backgroundColor,
-                padding: padding,
-                margin: margin,
-                borderRadius: borderRadius,
-                ...style
-            }}
-        >
-            {children}
-        </View>
-    );
+  return (
+    <View
+      style={{
+        backgroundColor,
+        ...restStyleProps,
+        ...style
+      }}
+    >
+      {children}
+    </View>
+  );
 }
 
 export function ContainerWithBackground({ children, style }) {
@@ -238,10 +253,11 @@ export function Shadow({ children, style }) {
     );
 }
 
-export function TextCustom({ children, style, color = root.C_BLACK, fontSize = 16, fontWeight = 'normal', textAlign = 'left', lineHeight = 20 }) {
+export function TextCustom({ children, style, color = root.C_BLACK, fontSize = 16, fontWeight = 'normal', textAlign = 'left', lineHeight = 25 }) {
     return (
         <Text
             style={{
+                fontFamily: root.C_FONT,
                 color: color,
                 fontSize: fontSize,
                 fontWeight: fontWeight,
@@ -271,7 +287,7 @@ export function ButtonCustom({ children, style, onPress, backgroundColor = root.
     );
 }
 
-export function Card({ children, style, backgroundColor = root.C_WHITE, padding = 10, borderRadius = 5 }) {
+export function CardCustom({ children, style, backgroundColor = root.C_WHITE, padding = 10, borderRadius = 10 }) {
     return (
         <View
             style={{
@@ -299,3 +315,16 @@ export function ImageCustom({ source, style, resizeMode = 'cover', width = 100, 
         />
     );
 }
+
+export function Line() {
+    return (
+        <View
+            style={{
+                height: 1,
+                backgroundColor: root.C_BLACK,
+                marginVertical: 10,
+                opacity: 0.1,
+            }}
+        />
+    );
+} 
