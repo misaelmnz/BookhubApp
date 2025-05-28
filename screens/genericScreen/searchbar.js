@@ -21,6 +21,7 @@ export default function SearchBar({ placeholder, onChangeText, style, editable, 
 
 const styles = StyleSheet.create({
     container: {
+        maxHeight: 60,
         backgroundColor: root.C_WHITE,
         borderRadius: 10,
         paddingHorizontal: 10,

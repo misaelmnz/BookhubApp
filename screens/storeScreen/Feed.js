@@ -2,7 +2,7 @@ import { useEffect, useState} from 'react';
 import { ScrollView, Alert, StyleSheet, Text } from 'react-native';
 import ItemCard from './ItemCard';
 import { Container, Line } from '../../ui/components';
-import { root, TextCustom } from '../../ui/components';
+import { root } from '../../ui/components';
 export default function Feed() {
     const [PUBS, SET_PUBS] = useState([]);
     useEffect(() => {

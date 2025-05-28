@@ -257,7 +257,7 @@ export function TextCustom({ children, style, color = root.C_BLACK, fontSize = 1
     return (
         <Text
             style={{
-                fontFamily: root.C_FONT,
+                fontFamily: root.C_FONT_LIST    ,
                 color: color,
                 fontSize: fontSize,
                 fontWeight: fontWeight,
