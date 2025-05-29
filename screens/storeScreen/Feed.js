@@ -8,7 +8,7 @@ export default function Feed() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://192.168.0.2:3000/receberPUBS');
+                const response = await fetch('http://192.168.140.166:3000/receberPUBS');
                 const data = await response.json();
                 SET_PUBS(data.data);
             } catch (err) {
@@ -24,12 +24,12 @@ export default function Feed() {
         <ScrollView horizontal={true} bounces={false} showsHorizontalScrollIndicator={false}>
             {PUBS && PUBS.map((PUB) => (
                 <ItemCard
-                    key={PUB.pub_id}
+                    id={PUB.pub_id}
                     titulo={PUB.pub_titulo}
                     tipo={PUB.item_tipo}
                     tipoVenda={PUB.pub_tipo}
+                    valor={PUB.pub_valor}
                     imagem={PUB.imagem}
-                    onPress={() => Alert.alert("Item selecionado")}
                     >
                 </ItemCard>
             ))}
