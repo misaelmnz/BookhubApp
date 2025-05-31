@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image } from 'react-native';
-import { CardCustom, Shadow, TextCustom, root } from '../../ui/components';
+import { CardCustom, Shadow, TextCustom, root } from '../../ui/Components';
 
 export default function ItemCard({ id ,titulo, tipo, tipoVenda, imagem }) {
 
@@ -12,7 +12,7 @@ export default function ItemCard({ id ,titulo, tipo, tipoVenda, imagem }) {
         return 'Revista';
       case 2:
         return 'Quadrinho';
-      case 3:;
+      case 3:
         return 'Coleção';
       default:
         return 'Desconhecido';
@@ -37,13 +37,13 @@ export default function ItemCard({ id ,titulo, tipo, tipoVenda, imagem }) {
       <CardCustom style={styles.card}>
         <Image source={{ uri: imagem }} style={styles.image} />
         <Shadow style={styles.badge}>
-          <TextCustom style={styles.badgeText}>{defineTipo(tipo)}</TextCustom>
+          <TextCustom style={styles.badgeText}></TextCustom>
         </Shadow>
-        <TextCustom style={styles.title}>{titulo}</TextCustom>
-        <TextCustom style={styles.marker}>{defineTipoVenda(tipoVenda)}</TextCustom>
+        <TextCustom style={styles.title}></TextCustom>
+        <TextCustom style={styles.marker}></TextCustom>
       </CardCustom>
     </Shadow>
-  );
+  )
 }
 
 const styles = StyleSheet.create({

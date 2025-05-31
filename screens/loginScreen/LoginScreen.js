@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Logo from './Logo';
 import LoginForm from './LoginForm';
-import { root , Container } from '../../ui/components';
+import { root , Container } from '../../ui/Components';
 
 
 export default function LoginScreen({ navigation }) {
@@ -32,7 +32,7 @@ export default function LoginScreen({ navigation }) {
               paddingHorizontal: 20,
             }}  
           >
-            <Logo />
+            <Logo/>
             <LoginForm navigation={navigation} />
           </Container>
         </ScrollView>

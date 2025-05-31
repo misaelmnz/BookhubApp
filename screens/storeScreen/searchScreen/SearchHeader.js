@@ -2,11 +2,11 @@ import React from 'react';
 
 import { View, StyleSheet, Text } from 'react-native';
 
-import { root, TextCustom } from '../../../ui/components';
+import { root, TextCustom } from '../../../ui/Components';
 
 import SearchBar from '../../genericScreen/searchbar';
 
-export default function Searchscreen({ onChangeText, style, navigation }) {
+export default function SearchHeader({ onChangeText, style, navigation }) {
 
     return (
         <View>

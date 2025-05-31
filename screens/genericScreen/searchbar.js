@@ -2,7 +2,7 @@ import React from 'react';
 
 import { View, TextInput, StyleSheet, Alert } from 'react-native';
 
-import { root } from '../../ui/components';
+import { root } from '../../ui/Components';
 
 export default function SearchBar({ placeholder, onChangeText, style, editable, redirect}) {
 

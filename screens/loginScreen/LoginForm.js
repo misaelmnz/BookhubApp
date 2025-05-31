@@ -5,8 +5,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  Text,
 } from 'react-native';
-import { Container, TextCustom, ButtonCustom, root } from '../../ui/components';
+import { Container, TextCustom, ButtonCustom, root } from '../../ui/Components';
 
 export default function LoginForm({ navigation }) {
   const [usuario, setUsuario] = useState('');
@@ -55,7 +56,7 @@ export default function LoginForm({ navigation }) {
         </TextCustom>
       </ButtonCustom>
       <View style={styles.registerContainer}>
-        <TextCustom>Não possui conta? </TextCustom>
+        <TextCustom>Não possui conta?</TextCustom>
         <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
           <TextCustom style={styles.registerLink}>Cadastre-se! </TextCustom>
         </TouchableOpacity>

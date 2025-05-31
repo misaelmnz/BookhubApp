@@ -1,8 +1,9 @@
 import { useEffect, useState} from 'react';
 import { ScrollView, Alert, StyleSheet, Text } from 'react-native';
 import ItemCard from './ItemCard';
-import { Container, Line } from '../../ui/components';
-import { root } from '../../ui/components';
+import { Container, Line } from '../../ui/Components';
+import { root } from '../../ui/Components';
+
 export default function Feed() {
     const [PUBS, SET_PUBS] = useState([]);
     useEffect(() => {
@@ -36,7 +37,6 @@ export default function Feed() {
         </ScrollView>
         <Line></Line>
     </Container>
-    
     );
 }
 
