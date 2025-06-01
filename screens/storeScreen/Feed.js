@@ -2,9 +2,9 @@ import { useEffect, useState} from 'react';
 import { ScrollView, Alert, StyleSheet, Text } from 'react-native';
 import ItemCard from './ItemCard';
 import { Container, Line } from '../../ui/Components';
-import { root } from '../../ui/Components';
+import { root, TextCustom } from '../../ui/Components';
 
-export default function Feed() {
+export default function Feed({ navigation }) {
     const [PUBS, SET_PUBS] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
@@ -26,17 +26,19 @@ export default function Feed() {
             {PUBS && PUBS.map((PUB) => (
                 <ItemCard
                     key={PUB.pub_id}
+                    id={PUB.pub_id}
                     titulo={PUB.pub_titulo}
                     tipo={PUB.item_tipo}
                     tipoVenda={PUB.pub_tipo}
+                    valor={PUB.pub_valor}
                     imagem={PUB.imagem}
-                    onPress={() => Alert.alert("Item selecionado")}
                     >
                 </ItemCard>
             ))}
         </ScrollView>
         <Line></Line>
     </Container>
+    
     );
 }
 

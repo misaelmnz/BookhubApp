@@ -1,20 +1,23 @@
 import React from 'react';
 
-import { View, TextInput, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, StyleSheet, Image } from 'react-native';
 
 import { root } from '../../ui/Components';
 
-export default function SearchBar({ placeholder, onChangeText, style, editable, redirect}) {
-
+export default function SearchBar({ placeholder, Search, SearchText, style, editable, searchQuery}) {
     return (
         <View style={[styles.container, style]}>
             <TextInput
                 style={styles.input}
                 placeholder={placeholder}
                 placeholderTextColor={root.C_GRAY}
-                onChangeText={onChangeText}
+                onChangeText={SearchText}
+                onSubmitEditing={Search}
                 editable={editable}
-            />
+                value={searchQuery}
+                maxLength={50}
+            /> 
+            <Image source={require('../../assets/search_bar.png')}/>
         </View>
     );
 }
@@ -30,6 +33,9 @@ const styles = StyleSheet.create({
         marginHorizontal: 5,
         borderColor: root.C_SUB_COLOR,
         borderWidth: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     input: {
         height: '100%',

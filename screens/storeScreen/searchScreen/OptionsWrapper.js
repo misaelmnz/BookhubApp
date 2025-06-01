@@ -35,7 +35,6 @@ export default function OptionsList({selectedGenres, toggleGenre}) {
     )
 }
 
-
 const styles = StyleSheet.create({
     containerGrid: {
         flexDirection: 'row',

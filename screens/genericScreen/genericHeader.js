@@ -3,15 +3,13 @@
 import { View, StyleSheet, SafeAreaView, Image } from 'react-native';
 import {root} from '../../ui/Components';
 
-export default function FooterDefault() {
+export default function HeaderDefault() {
   return (
-    <SafeAreaView>
       <View style={styles.footer}>
         <View style={styles.logoSize}>
         <Image source={require('../../assets/logo.png')} style={styles.logo}  />
         </View> 
       </View>
-    </SafeAreaView>
   );
 }
 

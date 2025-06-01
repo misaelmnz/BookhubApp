@@ -6,25 +6,11 @@ import { root, TextCustom, Container } from '../../../ui/Components';
 export default function OptionButton ({genreName, genreId, selected, onPress}) {
     return (
         <TouchableOpacity style={styles.touchable} onPress={onPress}>
-                <View style={[styles.container, selected && { borderColor: root.C_BLACK, borderWidth: 1}]}>
+                <View style={[styles.container, selected && { backgroundColor: '#7062B1' }]}>
                 <Text style={styles.text}>{String(genreName)}</Text>
             </View>
         </TouchableOpacity>
     );
-}
-
-export function Checkbox () {
-
-    const [selected, setSelected] = useState(false);
-    const toggleSelector = () => {
-    setSelected(prev => !prev);
-    };
-
-    return (
-    <TouchableOpacity onPress={toggleSelector}>
-            {selected ? <Toggled/> : <UnToggled/>}
-    </TouchableOpacity>
-    )
 }
 
 const Toggled = () => {
@@ -70,7 +56,6 @@ const styles = StyleSheet.create({
     containerCheckbox: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 10,
         height: 40,
         borderRadius: 10,
         paddingHorizontal: 10,

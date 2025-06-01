@@ -1,21 +1,26 @@
-import React from 'react';
-
+import React, {useState} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-
-import { root, TextCustom } from '../../../ui/Components';
-
+import { Container, root, TextCustom } from '../../../ui/Components';
 import SearchBar from '../../genericScreen/searchbar';
 
-export default function SearchHeader({ onChangeText, style, navigation }) {
-
+export default function SearchHeader({ Search, style, searchQuery, editable = true, SearchText}) {
+    
     return (
-        <View>
-            <TextCustom style={{ fontSize: 24, marginBottom: 10, color: root.C_BLACK, fontFamily: root.C_FONT_LIST.Light }}>Encontre seu Livro</TextCustom>
+        <View style={[styles.Container, style]}>
+            <TextCustom style={{ fontSize: 24, marginBottom: 10, color: root.C_BLACK, fontFamily: root.C_FONT_LIST.Light, alignSelf: 'center'}}>Encontre seu Livro</TextCustom>
             <SearchBar
                 placeholder="Buscar"
-                onChangeText={onChangeText}
+                Search={Search}
+                SearchText={SearchText}
+                editable={editable}
+                value={searchQuery}
             />
         </View>
     );
 }
- 
+
+const styles = StyleSheet.create({ 
+    Container: {
+        
+    }
+})

@@ -1,8 +1,22 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import { CardCustom, Shadow, TextCustom, root } from '../../ui/Components';
+import { useNavigation } from '@react-navigation/native';
 
-export default function ItemCard({ id ,titulo, tipo, tipoVenda, imagem }) {
+export default function ItemCard({ id, titulo, tipo, tipoVenda, valor, imagem, onPress }) {
+
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('Detalhe da publicação', {
+      pubId: id,
+      titulo,
+      tipo,
+      tipoVenda,
+      valor,
+      imagem,
+    });
+  };
 
   const defineTipo = (tipo) => {
     switch (tipo) {
@@ -12,11 +26,11 @@ export default function ItemCard({ id ,titulo, tipo, tipoVenda, imagem }) {
         return 'Revista';
       case 2:
         return 'Quadrinho';
-      case 3:
+      case 3: ;
         return 'Coleção';
       default:
         return 'Desconhecido';
-      }
+    }
   }
 
   const defineTipoVenda = (tipoVenda) => {
@@ -34,16 +48,23 @@ export default function ItemCard({ id ,titulo, tipo, tipoVenda, imagem }) {
 
   return (
     <Shadow style={styles.shadow}>
-      <CardCustom style={styles.card}>
-        <Image source={{ uri: imagem }} style={styles.image} />
-        <Shadow style={styles.badge}>
-          <TextCustom style={styles.badgeText}></TextCustom>
-        </Shadow>
-        <TextCustom style={styles.title}></TextCustom>
-        <TextCustom style={styles.marker}></TextCustom>
-      </CardCustom>
+      <TouchableOpacity onPress={handlePress}>
+        <CardCustom style={styles.card}>
+          <Image source={{ uri: imagem }} style={styles.image} />
+          <Shadow style={styles.badge}>
+            <Text style={styles.badgeText}>{defineTipo(tipo)}</Text>
+          </Shadow>
+          <Text style={styles.title}>{titulo}</Text>
+          <Text style={styles.marker}>{defineTipoVenda(tipoVenda)}</Text>
+          {tipoVenda === 1 && valor !== null && (
+            <Text style={styles.valor}>
+              R$ {Number(valor).toFixed(2).replace('.', ',')}
+            </Text>
+          )}
+        </CardCustom>
+      </TouchableOpacity>
     </Shadow>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -118,4 +139,11 @@ const styles = StyleSheet.create({
     color: root.C_WHITE,
     fontFamily: 'Inter-ExtraLight'
   },
+  valor: {
+    marginTop: 10,
+    fontSize: 16,
+    fontWeight: '600',
+    color: root.C_BLACK,
+    fontFamily: 'Inter-Bold'
+  }
 });
