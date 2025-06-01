@@ -116,7 +116,7 @@ export default function CadastroScreen({ navigation }) {
 
 
     try {
-      const response = await fetch('http://192.168.140.166:3000/cadastro', {
+      const response = await fetch('http://192.168.15.13:3000/cadastro', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -10,13 +10,10 @@ export default function ItemCard({ id, titulo, tipo, tipoVenda, valor, imagem, o
   const handlePress = () => {
     navigation.navigate('Detalhe da publicação', {
       pubId: id,
-      titulo,
-      tipo,
-      tipoVenda,
-      valor,
-      imagem,
+      tipoVenda: tipo
     });
   };
+
 
   const defineTipo = (tipo) => {
     switch (tipo) {
