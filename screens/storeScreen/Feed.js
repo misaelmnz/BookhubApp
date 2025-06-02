@@ -1,4 +1,4 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { ScrollView, Alert, StyleSheet, Text } from 'react-native';
 import ItemCard from './ItemCard';
 import { Container, Line } from '../../ui/Components';
@@ -21,25 +21,25 @@ export default function Feed({ navigation }) {
     }, []);
 
     return (
-        <Container style={{marginTop: 20, backgroundColor: root.C_WHITE, padding: 20, borderRadius: 10}}>
-        <Text style={styles.title}>Itens Disponíveis</Text>
-        <ScrollView horizontal={true} bounces={false} showsHorizontalScrollIndicator={false}>
-            {PUBS && PUBS.map((PUB) => (
-                <ItemCard
-                    key={PUB.pub_id}
-                    id={PUB.pub_id}
-                    titulo={PUB.pub_titulo}
-                    tipo={PUB.item_tipo}
-                    tipoVenda={PUB.pub_tipo}
-                    valor={PUB.pub_valor}
-                    imagem={PUB.imagem}
+        <Container style={{ marginTop: 20, backgroundColor: root.C_WHITE, padding: 20, borderRadius: 10 }}>
+            <Text style={styles.title}>Itens Disponíveis</Text>
+            <ScrollView horizontal={true} bounces={false} showsHorizontalScrollIndicator={false}>
+                {PUBS && PUBS.map((PUB) => (
+                    <ItemCard
+                        key={PUB.pub_id}
+                        id={PUB.pub_id}
+                        titulo={PUB.pub_titulo}
+                        tipo={PUB.item_tipo}
+                        tipoVenda={PUB.pub_tipo}
+                        valor={PUB.pub_valor}
+                        imagem={PUB.imagem}
                     >
-                </ItemCard>
-            ))}
-        </ScrollView>
-        <Line></Line>
-    </Container>
-    
+                    </ItemCard>
+                ))}
+            </ScrollView>
+            <Line></Line>
+        </Container>
+
     );
 }
 

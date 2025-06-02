@@ -6,6 +6,7 @@ import CadastroScreen from '../screens/cadastroScreen/CadastroScreen';
 import FeedScreen from '../screens/storeScreen/FeedScreen';
 import SearchScreen from '../screens/storeScreen/searchScreen/SearchScreen';
 import ResultScreen from '../screens/storeScreen/resultsScreen/ResultScreen';
+import DetailScreen from '../screens/storeScreen/detailScreen/DetailScreen'
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,8 @@ export default function AppNavigator() {
         <Stack.Screen name="Cadastro" component={CadastroScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="Pesquisa" component={SearchScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Resultado" component={ResultScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Cadastro" component={CadastroScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Detalhe da publicação" component={DetailScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

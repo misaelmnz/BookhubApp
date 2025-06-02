@@ -27,11 +27,12 @@ export default function ItemCard({ id, titulo, tipo, tipoVenda, valor, imagem, o
       case 2:
         return 'Quadrinho';
       case 3: ;
+      case 3: ;
         return 'Coleção';
       default:
         return 'Desconhecido';
     }
-  }
+    }
 
   const defineTipoVenda = (tipoVenda) => {
     switch (tipoVenda) {
@@ -47,23 +48,23 @@ export default function ItemCard({ id, titulo, tipo, tipoVenda, valor, imagem, o
   }
 
   return (
+    <Shadow style={styles.shadow}>
       <TouchableOpacity onPress={handlePress}>
-        <Shadow style={styles.shadow}>
         <CardCustom style={styles.card}>
           <Image source={{ uri: imagem }} style={styles.image} />
           <Shadow style={styles.badge}>
-            <Text style={styles.badgeText}>{defineTipo(tipo)}</Text>
+            <TextCustom style={styles.badgeText}>{defineTipo(tipo)}</TextCustom>
           </Shadow>
-          <Text style={styles.title}>{titulo}</Text>
-          <Text style={styles.marker}>{defineTipoVenda(tipoVenda)}</Text>
+          <TextCustom style={styles.title}>{titulo}</TextCustom>
+          <TextCustom style={styles.marker}>{defineTipoVenda(tipoVenda)}</TextCustom>
           {tipoVenda === 1 && valor !== null && (
-            <Text style={styles.valor}>
+            <TextCustom style={styles.valor}>
               R$ {Number(valor).toFixed(2).replace('.', ',')}
-            </Text>
+            </TextCustom>
           )}
         </CardCustom>
-      </Shadow>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </Shadow>
   );
 }
 
