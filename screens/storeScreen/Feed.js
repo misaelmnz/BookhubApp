@@ -3,20 +3,21 @@ import { ScrollView, Alert, StyleSheet, Text } from 'react-native';
 import ItemCard from './ItemCard';
 import { Container, Line } from '../../ui/Components';
 import { root, TextCustom } from '../../ui/Components';
+import { fetchFeedItem } from './storeController/StoreController'
 
 export default function Feed({ navigation }) {
     const [PUBS, SET_PUBS] = useState([]);
     useEffect(() => {
-        const fetchData = async () => {
+        async function loadFeed() {
             try {
-                const response = await fetch('http://192.168.0.2:3000/receberPUBS');
-                const data = await response.json();
-                SET_PUBS(data.data);
-            } catch (err) {
-                console.error("Erro ao buscar items:", err);
+                const response = await fetchFeedItem();
+                SET_PUBS(response);
+            } 
+            catch (err) {  
+                console.error("Erro ao buscar publicações:", err);
             }
-        };
-        fetchData();
+        }
+        loadFeed();
     }, []);
 
     return (

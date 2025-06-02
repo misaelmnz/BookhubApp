@@ -47,8 +47,8 @@ export default function ItemCard({ id, titulo, tipo, tipoVenda, valor, imagem, o
   }
 
   return (
-    <Shadow style={styles.shadow}>
       <TouchableOpacity onPress={handlePress}>
+        <Shadow style={styles.shadow}>
         <CardCustom style={styles.card}>
           <Image source={{ uri: imagem }} style={styles.image} />
           <Shadow style={styles.badge}>
@@ -62,8 +62,8 @@ export default function ItemCard({ id, titulo, tipo, tipoVenda, valor, imagem, o
             </Text>
           )}
         </CardCustom>
-      </TouchableOpacity>
-    </Shadow>
+      </Shadow>
+    </TouchableOpacity>
   );
 }
 

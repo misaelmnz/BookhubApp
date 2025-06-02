@@ -4,6 +4,7 @@ import ResultCard from './ResultCard';
 import { Container, Line, root } from '../../../ui/Components';
 import HeaderDefault from '../../genericScreen/genericHeader';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { SearchBar } from 'react-native-screens';
 
 export default function ResultScreen({ route, navigation }) {
 
@@ -13,6 +14,7 @@ return(
     <SafeAreaView style={{ flex: 1, backgroundColor: root.C_WHITE }}>
     <HeaderDefault navigation={navigation}/>
     <Container style={styles.container}>
+        <SearchBar></SearchBar>
         <Text style={styles.searchReference}>
             Resultados da Pesquisa: {searchText}
         </Text>

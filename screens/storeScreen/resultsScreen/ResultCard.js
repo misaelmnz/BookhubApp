@@ -1,16 +1,30 @@
 import React from 'react';
 import { StyleSheet, Image, Text, Button } from 'react-native';
 import { CardCustom, Shadow, root, Container, ButtonCustom } from '../../../ui/Components';
-
+import { useNavigation } from '@react-navigation/native';
 
 export default function ResultCard({ 
   id, 
-  tipoPublicacao,
   titulo='Titulo da Obra', 
-  nome='...', 
+  nome='...',
+  tipoVenda,
   imagem, 
-  preco='...', 
+  preco='...',
+  valor='...', 
   onPress }) {
+
+  const navigation = useNavigation();
+
+  const handlePress = () => {
+    navigation.navigate('Detalhe da publicação', {
+      pubId: id,
+      titulo,
+      tipo,
+      tipoVenda,
+      valor,
+      imagem,
+    });
+  };
 
   return (
     <Shadow style={styles.shadow}>
@@ -23,7 +37,7 @@ export default function ResultCard({
                   <Text style={styles.price}>R$ {Number(preco).toFixed(2).replace('.', ',')}</Text>
                 }
                   <ButtonCustom
-                      onPress={onPress}
+                      onPress={handlePress}
                       padding={5}
                       style={
                         {
