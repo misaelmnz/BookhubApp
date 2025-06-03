@@ -7,7 +7,7 @@ import {
   Alert,
   Text,
 } from 'react-native';
-import { Container, TextCustom, ButtonCustom, root } from '../../ui/Components';
+import { Container, ButtonCustom, root } from '../../ui/Components';
 
 export default function LoginForm({ navigation }) {
   const [usuario, setUsuario] = useState('');
@@ -51,14 +51,14 @@ export default function LoginForm({ navigation }) {
         onChangeText={setSenha}
       />
       <ButtonCustom onPress={handleLogin} style={styles.button}>
-        <TextCustom color={root.C_WHITE} fontWeight="bold" textAlign="center">
+        <Text color={root.C_WHITE} fontWeight="bold" textAlign="center">
           Entrar
-        </TextCustom>
+        </Text>
       </ButtonCustom>
       <View style={styles.registerContainer}>
-        <TextCustom>Não possui conta?</TextCustom>
+        <Text>Não possui conta?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-          <TextCustom style={styles.registerLink}>Cadastre-se! </TextCustom>
+          <Text style={styles.registerLink}> Cadastre-se! </Text>
         </TouchableOpacity>
       </View>
     </Container>

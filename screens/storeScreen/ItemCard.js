@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
-import { CardCustom, Shadow, TextCustom, root } from '../../ui/Components';
+import { CardCustom, Shadow, root } from '../../ui/Components';
 import { useNavigation } from '@react-navigation/native';
 
-export default function ItemCard({ id, titulo, tipo, tipoVenda, valor, imagem, onPress }) {
+export default function ItemCard({ id, titulo='', tipo='', tipoVenda='', valor='', imagem, onPress }) {
 
   const navigation = useNavigation();
 
@@ -19,15 +19,14 @@ export default function ItemCard({ id, titulo, tipo, tipoVenda, valor, imagem, o
   };
 
   const defineTipo = (tipo) => {
-    switch (tipo) {
+    switch (Number(tipo)) {
       case 0:
         return 'Livro';
       case 1:
         return 'Revista';
       case 2:
         return 'Quadrinho';
-      case 3: ;
-      case 3: ;
+      case 3: 
         return 'Coleção';
       default:
         return 'Desconhecido';
@@ -35,7 +34,7 @@ export default function ItemCard({ id, titulo, tipo, tipoVenda, valor, imagem, o
     }
 
   const defineTipoVenda = (tipoVenda) => {
-    switch (tipoVenda) {
+    switch (Number(tipoVenda)) {
       case 0:
         return 'Doação';
       case 1:
@@ -46,21 +45,20 @@ export default function ItemCard({ id, titulo, tipo, tipoVenda, valor, imagem, o
         return 'Desconhecido';
     }
   }
-
   return (
     <Shadow style={styles.shadow}>
       <TouchableOpacity onPress={handlePress}>
         <CardCustom style={styles.card}>
           <Image source={{ uri: imagem }} style={styles.image} />
           <Shadow style={styles.badge}>
-            <TextCustom style={styles.badgeText}>{defineTipo(tipo)}</TextCustom>
+            <Text style={styles.badgeText}>{defineTipo(tipo)}</Text>
           </Shadow>
-          <TextCustom style={styles.title}>{titulo}</TextCustom>
-          <TextCustom style={styles.marker}>{defineTipoVenda(tipoVenda)}</TextCustom>
-          {tipoVenda === 1 && valor !== null && (
-            <TextCustom style={styles.valor}>
+          <Text style={styles.title}>{titulo}</Text>
+          <Text style={styles.marker}>{defineTipoVenda(tipoVenda)}</Text>
+          {Number(tipoVenda) === 1 && valor !== null && (
+            <Text style={styles.valor}>
               R$ {Number(valor).toFixed(2).replace('.', ',')}
-            </TextCustom>
+            </Text>
           )}
         </CardCustom>
       </TouchableOpacity>
