@@ -5,6 +5,7 @@ import OptionsList from './OptionsWrapper';
 import { CheckboxContainer } from './OptionsButton';
 import SearchHeader from './SearchHeader';
 import { fetchSearchResults } from '../storeController/StoreController';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Screen({ navigation }) {
 
@@ -30,9 +31,7 @@ export default function Screen({ navigation }) {
 
     const selectPublicationType = (name) => setSelectedPublicationType(name);
 
-    const handleSearchTextChange = (text) => {
-        setSearchText(text);
-    };
+    const handleSearchTextChange = (text) => setSearchText(text);
 
     const handleSearchTextSubmit = async () => {
         const filters = {

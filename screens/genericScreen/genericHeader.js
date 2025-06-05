@@ -1,6 +1,6 @@
 import { View, StyleSheet, SafeAreaView, Image, Text } from 'react-native';
 import { root } from '../../ui/Components';
-
+import Menu from './menu';
 export default function HeaderDefault() {
   return (
       <View style={styles.footer}>
@@ -10,17 +10,19 @@ export default function HeaderDefault() {
           </View>
           <Text style={styles.logoText}>BOOKHUB</Text>
         </View>
+        <Menu/>
       </View>
   );
 }
 
 const styles = StyleSheet.create({
   footer: {
+    width: '100%',
     height: 60,
     backgroundColor: root.C_MAIN_COLOR,
     paddingHorizontal: 14,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
 

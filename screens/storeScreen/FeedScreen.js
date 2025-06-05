@@ -12,13 +12,12 @@ import Feed from "./Feed";
 
 export default function FeedScreen({ navigation }) {
     return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <HeaderDefault/>
-      <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{ paddingBottom: 60 }}
+      <SafeAreaView style={{ flex: 1 }}>
+        <HeaderDefault/>
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 60 }}
         >
-        <FeedIntro/>
+          <FeedIntro/>
         <Feed/>
         <Feed/>
         <Feed/>

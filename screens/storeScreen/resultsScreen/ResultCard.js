@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, Text, Button } from 'react-native';
-import { CardCustom, Shadow, root, Container, ButtonCustom } from '../../../ui/Components';
+import { CardCustom, Shadow, root, Container, ButtonCustom, Line} from '../../../ui/Components';
 import { useNavigation } from '@react-navigation/native';
 
 export default function ResultCard({ 
@@ -8,6 +8,7 @@ export default function ResultCard({
   titulo='Titulo da Obra', 
   nome='...',
   tipoVenda,
+  tipo,
   imagem, 
   preco='...',
   valor='...', 
@@ -50,6 +51,7 @@ export default function ResultCard({
                   </ButtonCustom>
             </Container>
       </CardCustom>
+      <Line/>
     </Shadow>
   )
 }
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 5,
     backgroundColor: root.C_BACKGROUND_COLOR,
-    width: '90%',
+    width: 360,
     height: 150,
     flexDirection: 'row',
     alignItems: 'flex-start',
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 2,
   },
 
   container: {
@@ -86,9 +88,10 @@ const styles = StyleSheet.create({
   },
 
   image: {
+    resizeMode: 'contain',
     width: '30%',
     height: '100%',
-    backgroundColor: '#ccc',
+    backgroundColor: root.C_BACKGROUND_COLOR,
     marginBottom: 8,
     borderRadius: 5, 
   },
@@ -107,9 +110,9 @@ const styles = StyleSheet.create({
   },
 
   price: {
-    fontSize: 16,
+    fontSize: 18,
     color: root.C_BLACK,
-    fontFamily: root.C_FONT_LIST.Medium,
+    fontFamily: root.C_FONT_LIST.Bold,
     alignSelf: 'flex-end',
   },
 

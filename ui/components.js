@@ -10,6 +10,7 @@ export const root = {
     C_PURPLE: '#A193E0',
     C_BLACK: '#040111',
     C_WHITE: '#FFFFFF',
+    C_GREY: 'F3F3F3',
     C_FONT_LIST: {
         Black: 'Inter-Black',
         BlackItalic: 'Inter-BlackItalic',

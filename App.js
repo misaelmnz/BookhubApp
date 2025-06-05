@@ -4,8 +4,13 @@ import { StyleSheet } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import * as Font from 'expo-font';
 import { useEffect, useState } from 'react';
+import { AuthProvider } from './context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App() { 
+  const [userToken, setUserToken] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
@@ -31,16 +36,31 @@ export default function App() {
     }).then(() => setFontsLoaded(true));
   }, []);
 
+  useEffect(() => {
+    const loadToken = async () => {
+      const token = await AsyncStorage.getItem('token');
+      if (token) setUserToken(token);
+      setIsLoading(false);
+    }
+    loadToken()
+  }, [])
+
+  if (isLoading) {
+    return null;
+  }
+
   if (!fontsLoaded) {
     return null; 
   }
 
   return (
+    <AuthProvider userToken={userToken} setUserToken={setUserToken}> 
     <SafeAreaProvider>
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <AppNavigator />
       </SafeAreaView>
     </SafeAreaProvider>
+    </AuthProvider>
   );
 }
 
