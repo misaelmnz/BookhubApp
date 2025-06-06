@@ -6,10 +6,13 @@ import { root, Line } from '../../ui/Components';
 import { useAuth } from '../../context/AuthContext'
 
 
-const MenuOption = ({onPress, Texto}) => {
+const MenuOption = ({onPress, Texto, name}) => {
     return(
-        <TouchableOpacity onPress={onPress}>
-            <Text style={styles.menuItem}>{Texto}</Text>
+        <TouchableOpacity onPress={onPress} style={{ marginLeft: 8 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Entypo name={name} size={24} color="black"/>
+                <Text style={styles.menuItem}>{Texto}</Text>
+            </View>
         </TouchableOpacity>
     )
 }
@@ -24,7 +27,7 @@ export default function Menu() {
     <View>
         <TouchableOpacity onPress={()=>setVisible(true)}>
             <Entypo name='dots-three-vertical' size={24} color="white"/>
-        </TouchableOpacity>
+        </TouchableOpacity>documents
 
         <Modal
         visible={visible}
@@ -35,19 +38,24 @@ export default function Menu() {
             <TouchableOpacity onPress={()=> setVisible(false)} style={styles.modalMenu} activeOpacity={1}>
                 <View style={styles.menuContainer}>
                     <View style={styles.menuBox}>
-                        <MenuOption style={styles.menuItem} Texto={'Perfil de Usuário'}/>
-                        <MenuOption style={styles.menuItem} Texto={'Visualizar Publicações'}/>
-                        <MenuOption onPress={async () =>
-                            {
-                                try {
-                                setVisible(false);
-                                await logout();
-                                navigate.reset({index: 0, routes: [{name: 'Login'}]})
-                                } catch (err) {
-                                console.log(err)    
-                                }
+                        <MenuOption onPress={()=> {
+                            navigate.navigate('Perfil de Usuário')
+                        }} 
+                        style={styles.menuItem} Texto={'Perfil de Usuário'} name={'user'}/>
+                        <MenuOption onPress={()=> {
+                            navigate.navigate('Publicação')
+                        }}  
+                        style={styles.menuItem} Texto={'Minhas Publicações'} name={'documents'}/>
+                        <MenuOption onPress={async () => {
+                            try {
+                            setVisible(false);
+                            await logout();
+                            navigate.reset({index: 0, routes: [{name: 'Login'}]})
+                            } catch (err) {
+                            console.log(err)    
                             }
-                        } style={styles.menuItem} Texto={'Sair'}/>
+                        }}
+                         style={styles.menuItem} Texto={'Sair'} name={'log-out'}/>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -78,16 +86,14 @@ const styles = StyleSheet.create({
     },  
 
     menuItem: {
-        borderColor: 'grey',
-        borderWidth: 0.3,
         borderRadius: 10,
         width: '100%',
         marginVertical: 5,
         paddingVertical: 12,
         paddingHorizontal: 10,
         fontFamily: root.C_FONT_LIST.Light,
-        fontSize: 16,
-        alignSelf: 'flex-start'
+        fontSize: 14,
+        alignSelf: 'flex-start',
     }
 
 });
