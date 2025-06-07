@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
-import { root, Container } from '../../../ui/Components';
+import { root, Container } from '../../../ui/components';
 import OptionsList from './OptionsWrapper';
 import { CheckboxContainer } from './OptionsButton';
 import SearchHeader from './SearchHeader';

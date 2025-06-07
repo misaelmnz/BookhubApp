@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, Text, Button } from 'react-native';
-import { CardCustom, Shadow, root, Container, ButtonCustom, Line} from '../../../ui/Components';
+import { CardCustom, Shadow, root, Container, ButtonCustom, Line} from '../../../ui/components';
 import { useNavigation } from '@react-navigation/native';
 
 export default function ResultCard({ 

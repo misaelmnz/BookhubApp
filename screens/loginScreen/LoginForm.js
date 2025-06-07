@@ -7,7 +7,7 @@ import {
   Alert,
   Text,
 } from 'react-native';
-import { Container, ButtonCustom, root } from '../../ui/Components';
+import { Container, ButtonCustom, root } from '../../ui/components';
 import { useAuth } from '../../context/AuthContext';
 
 
@@ -49,7 +49,7 @@ export default function LoginForm({ navigation }) {
         onChangeText={setSenha}
       />
       <ButtonCustom onPress={handleLogin} style={styles.button}>
-        <Text color={root.C_WHITE} fontWeight="bold" textAlign="center">
+        <Text color={root.C_WHITE}fontWeight="bold" textAlign="center">
           Entrar
         </Text>
       </ButtonCustom>
@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   button: {
+    alignItems: 'center',
     marginTop: 8,
     marginBottom: 8,
     backgroundColor: root.C_MAIN_COLOR,

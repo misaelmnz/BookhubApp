@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Logo from './Logo';
 import LoginForm from './LoginForm';
-import { root , Container } from '../../ui/Components';
+import { root , Container } from '../../ui/components';
 
 
 export default function LoginScreen({ navigation }) {

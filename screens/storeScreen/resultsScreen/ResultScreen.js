@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button} from 'react-native';
 import ResultCard from './ResultCard';
-import { Container, Line, root } from '../../../ui/Components';
+import { Container, Line, root } from '../../../ui/components';
 import HeaderDefault from '../../genericScreen/genericHeader';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SearchBar } from 'react-native-screens';

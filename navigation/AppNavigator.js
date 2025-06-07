@@ -8,7 +8,7 @@ import SearchScreen from '../screens/storeScreen/searchScreen/SearchScreen';
 import ResultScreen from '../screens/storeScreen/resultsScreen/ResultScreen';
 import DetailScreen from '../screens/storeScreen/detailScreen/DetailScreen';
 import Item from '../screens/storeScreen/ItemCard';
-import PublicationScreen from '../screens/publicationScreen/publicationScreen';
+import PublicationScreen from '../screens/publicationScreen/PublicationScreen';
 import { useAuth } from '../context/AuthContext';
 
 const Stack = createNativeStackNavigator();

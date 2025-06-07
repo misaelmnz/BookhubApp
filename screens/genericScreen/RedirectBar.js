@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Image, Pressable, Text } from 'react-native';
-import { root } from '../../ui/Components';
+import { root } from '../../ui/components';
 import { useNavigation } from '@react-navigation/native';
 
 export function RedirectBar({ style, placeholder }) {

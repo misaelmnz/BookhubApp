@@ -1,5 +1,5 @@
 import { View, StyleSheet, SafeAreaView, Image, Text } from 'react-native';
-import { root } from '../../ui/Components';
+import { root } from '../../ui/components';
 import Menu from './menu';
 export default function HeaderDefault() {
   return (
