@@ -102,8 +102,6 @@ export default function CadastroScreen({ navigation }) {
     return { erros, nomeFormatado, sobrenomeFormatado };
   };
 
-
-
   const handleSubmit = async () => {
     const { erros, nomeFormatado, sobrenomeFormatado } = validarCampos();
     setErrorFields(erros);

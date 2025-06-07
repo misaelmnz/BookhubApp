@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, SafeAreaView, Text, Image, Modal, StyleSheet, TouchableOpacity, ScrollView, Linking } from 'react-native';
 import axios from 'axios';
-import FooterDefault from "../../genericScreen/genericHeader";
+import FooterDefault from "../../genericScreen/Header";
 import { root } from '../../../ui/Components';
+import { API_URL } from '../../../api/auth';
 
 export default function DetailScreen({ route, navigation }) {
   const { pubId } = route.params;
@@ -10,7 +11,7 @@ export default function DetailScreen({ route, navigation }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://192.168.0.2:3000/detalhesPUB/${pubId}`)
+    axios.get(`${API_URL}/detalhesPUB/${pubId}`)
       .then(response => {
         setDetalhes(response.data.data);
       })

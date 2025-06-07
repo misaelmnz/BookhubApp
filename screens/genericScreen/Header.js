@@ -1,12 +1,13 @@
 import { View, StyleSheet, SafeAreaView, Image, Text } from 'react-native';
 import { root } from '../../ui/Components';
 import Menu from './menu';
+
 export default function HeaderDefault() {
   return (
       <View style={styles.footer}>
         <View style={styles.logoContainer}>
           <View style={styles.logoSize}>
-            <Image source={require('../../assets/logo.png')} style={styles.logo} />
+            <Image source={require('../../assets/logo.png')} style={styles.logo}/>
           </View>
           <Text style={styles.logoText}>BOOKHUB</Text>
         </View>

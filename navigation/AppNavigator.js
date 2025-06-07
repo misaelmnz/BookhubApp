@@ -8,8 +8,8 @@ import SearchScreen from '../screens/storeScreen/searchScreen/SearchScreen';
 import ResultScreen from '../screens/storeScreen/resultsScreen/ResultScreen';
 import DetailScreen from '../screens/storeScreen/detailScreen/DetailScreen';
 import Item from '../screens/storeScreen/ItemCard';
-import PublicationScreen from '../screens/publicationScreen/publicationScreen';
 import { useAuth } from '../context/AuthContext';
+import PublicationMain from '../screens/publicationScreen/PubScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +25,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Resultado" component={ResultScreen} options={{ headerShown: false }}  />
         <Stack.Screen name="Detalhe da publicação" component={DetailScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="Teste" component={Item} />
-        <Stack.Screen name="Publicação" component={PublicationScreen} options={{ headerShown: false}}/>
+        <Stack.Screen name="Publicação" component={PublicationMain} options={{ headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

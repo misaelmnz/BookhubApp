@@ -2,11 +2,11 @@ import { NativeModuleType } from "expo";
 import React from "react";
 import { SafeAreaView, ScrollView, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import HeaderDefault from "../genericScreen/genericHeader";
+import HeaderDefault from '../genericScreen/Header';
 import FeedIntro from "./FeedIntro";
 import SearchBar from "../genericScreen/searchbar";
 import ItemCard from "./ItemCard";
-import Feed from "./Feed";
+import Feed from "./FeedList";
 
 
 

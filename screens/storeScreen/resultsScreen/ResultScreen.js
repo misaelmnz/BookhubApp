@@ -2,10 +2,10 @@ import React from 'react';
 import { View, StyleSheet, Text, Button} from 'react-native';
 import ResultCard from './ResultCard';
 import { Container, Line, root } from '../../../ui/Components';
-import HeaderDefault from '../../genericScreen/genericHeader';
+import HeaderDefault from '../../genericScreen/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SearchBar } from 'react-native-screens';
-import { RedirectBar } from '../../genericScreen/RedirectBar';
+import { RedirectBar } from '../../genericScreen/redirectBar';
 import Result from './Result';
 
 export default function ResultScreen({ route, navigation }) {
@@ -13,7 +13,7 @@ export default function ResultScreen({ route, navigation }) {
     const {searchText, data} = route.params;
 
 return(
-    <SafeAreaView style={{flex: 1, backgroundColor: root.C_WHITE}}>
+    <View style={{flex: 1, backgroundColor: root.C_WHITE}}>
     <HeaderDefault navigation={navigation}/>
     <Container style={styles.container}>
         <RedirectBar/>
@@ -22,7 +22,7 @@ return(
             </Text>
         <Result data={data}/>
     </Container>
-    </SafeAreaView>
+    </View>
 )
 }
 

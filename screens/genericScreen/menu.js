@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Text, SafeAreaView, StyleSheet, Modal, View, Touchable, TouchableOpacity } from 'react-native';
+import { Text, SafeAreaView, StyleSheet, Modal, View, Touchable, TouchableOpacity, Alert } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { root, Line } from '../../ui/Components';
 import { useAuth } from '../../context/AuthContext'
 
 
-const MenuOption = ({onPress, Texto, name}) => {
+export const MenuOption = ({onPress, Texto, name, style}) => {
     return(
         <TouchableOpacity onPress={onPress} style={{ marginLeft: 8 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -17,6 +17,23 @@ const MenuOption = ({onPress, Texto, name}) => {
     )
 }
 
+const logoutAlert = (setVisible, logout, navigate) => {
+    Alert.alert('Logout', 'Tem certeza que deseja sair?', [
+        { 
+            text: 'Cancelar',
+        },
+        
+        {
+            text: 'Sim',
+            onPress: () => {
+                try {
+                setVisible(false);
+                logout();
+                navigate.reset({index: 0, routes: [{name: 'Login'}]})
+            } catch (err) {
+                console.log(err)    
+        }}
+}])}
 
 export default function Menu() {
   const [visible, setVisible] = useState(false); 
@@ -27,8 +44,8 @@ export default function Menu() {
     <View>
         <TouchableOpacity onPress={()=>setVisible(true)}>
             <Entypo name='dots-three-vertical' size={24} color="white"/>
-        </TouchableOpacity>documents
-
+        </TouchableOpacity>
+            
         <Modal
         visible={visible}
         animationType="slide"
@@ -42,19 +59,13 @@ export default function Menu() {
                             navigate.navigate('Perfil de Usuário')
                         }} 
                         style={styles.menuItem} Texto={'Perfil de Usuário'} name={'user'}/>
+
                         <MenuOption onPress={()=> {
                             navigate.navigate('Publicação')
                         }}  
                         style={styles.menuItem} Texto={'Minhas Publicações'} name={'documents'}/>
-                        <MenuOption onPress={async () => {
-                            try {
-                            setVisible(false);
-                            await logout();
-                            navigate.reset({index: 0, routes: [{name: 'Login'}]})
-                            } catch (err) {
-                            console.log(err)    
-                            }
-                        }}
+
+                        <MenuOption onPress={() => logoutAlert(setVisible, logout, navigate)}
                          style={styles.menuItem} Texto={'Sair'} name={'log-out'}/>
                     </View>
                 </View>

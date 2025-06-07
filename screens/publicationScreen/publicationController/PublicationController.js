@@ -8,6 +8,7 @@ export async function fetchUserPubs () {
         const response = await axios.get(`${API_URL}/userPUBs`, 
             { headers: {Authorization: `User ${token}`}});
         const data = response.data;
+        return data;
     } catch(err) {
         console.log(err)
     }
@@ -15,7 +16,7 @@ export async function fetchUserPubs () {
 
 export async function createPubs () {
     try {
-
+        
     } catch(err) {
         console.log(err)
     }

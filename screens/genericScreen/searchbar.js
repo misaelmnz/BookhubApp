@@ -2,6 +2,13 @@ import React from 'react';
 import { View, TextInput, StyleSheet, Image, Pressable } from 'react-native';
 import { root } from '../../ui/Components';
 import { useNavigation } from '@react-navigation/native';
+import { Entypo } from '@expo/vector-icons';
+
+export const Lupa = () => {
+    return (
+        <Entypo name='magnifying-glass' size={30} color="black"/>
+    )
+}
 
 export default function SearchBar({ placeholder, Search, SearchText, style, editable, searchQuery}) {
     return (
@@ -16,7 +23,7 @@ export default function SearchBar({ placeholder, Search, SearchText, style, edit
                 value={searchQuery}
                 maxLength={50}
             /> 
-            <Image source={require('../../assets/search_bar.png')}/>
+            <Lupa/>
         </View>
     );
 }

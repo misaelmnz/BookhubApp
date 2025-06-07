@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, View, StyleSheet } from 'react-native';
-import { RedirectBar }  from '../genericScreen/RedirectBar';
+import { RedirectBar }  from '../genericScreen/redirectBar';
 
 export default function FeedIntro() {
   return (
