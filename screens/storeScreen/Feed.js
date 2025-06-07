@@ -9,7 +9,7 @@ export default function Feed({ navigation }) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://192.168.15.13:3000/receberPUBS');
+                const response = await fetch('http://192.168.28.166:3000/receberPUBS');
                 const data = await response.json();
                 SET_PUBS(data.data);
             } catch (err) {
