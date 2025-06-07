@@ -5,33 +5,32 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  Text,
 } from 'react-native';
-import { Container, TextCustom, ButtonCustom, root } from '../../ui/components';
+import { Container, ButtonCustom, root } from '../../ui/Components';
+import { useAuth } from '../../context/AuthContext';
+
 
 export default function LoginForm({ navigation }) {
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
+  const { login } = useAuth();
 
   const handleLogin = async () => {
-    try {
-      const response = await fetch('http://192.168.28.166:3000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuario, senha }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        navigation.navigate('Feed');
-      } else {
-        Alert.alert('Erro', 'Usuário não localizado ou dados incorretos.');
-      }
-    } catch (error) {
-      Alert.alert('Erro', 'Erro ao conectar com o servidor.');
-      console.log(error);
+  try {
+    const success = await login(usuario, senha);
+    if (success) {
+      navigation.navigate('Feed');
+      console.log(usuario, senha)
+    } else {
+      Alert.alert('Erro', 'Usuário ou senha inválidos.');
+      console.log(usuario, senha)
     }
-  };
+  } catch (error) {
+    Alert.alert('Erro', 'Erro ao conectar com o servidor.');
+    console.log(error);
+  }
+};
 
   return (
     <Container style={styles.form}>
@@ -50,14 +49,14 @@ export default function LoginForm({ navigation }) {
         onChangeText={setSenha}
       />
       <ButtonCustom onPress={handleLogin} style={styles.button}>
-        <TextCustom color={root.C_WHITE} fontWeight="bold" textAlign="center">
+        <Text color={root.C_WHITE} fontWeight="bold" textAlign="center">
           Entrar
-        </TextCustom>
+        </Text>
       </ButtonCustom>
       <View style={styles.registerContainer}>
-        <TextCustom>Não possui conta? </TextCustom>
+        <Text>Não possui conta?</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
-          <TextCustom style={styles.registerLink}>Cadastre-se! </TextCustom>
+          <Text style={styles.registerLink}> Cadastre-se! </Text>
         </TouchableOpacity>
       </View>
     </Container>

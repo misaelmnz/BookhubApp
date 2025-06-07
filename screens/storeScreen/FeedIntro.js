@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image, View, StyleSheet } from 'react-native';
-import { root } from '../../ui/components';
-import SearchBar from '../genericScreen/searchbar';
+import { RedirectBar }  from '../genericScreen/RedirectBar';
 
 export default function FeedIntro() {
   return (
@@ -10,11 +9,7 @@ export default function FeedIntro() {
         source={require('../../assets/Group 13(1).png')}
         style={styles.image}
       />
-      <SearchBar
-       style={styles.SearchBar}
-       placeholder={"Buscar"}
-       editable={false}
-      />
+      <RedirectBar style={styles.SearchBar}/>
     </View>
   ); 
 }

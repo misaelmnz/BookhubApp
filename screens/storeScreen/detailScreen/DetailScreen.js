@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, SafeAreaView, Text, Image, Modal, StyleSheet, Animated, TouchableOpacity, ScrollView, Linking } from 'react-native';
 import axios from 'axios';
 import FooterDefault from "../../genericScreen/genericHeader";
-import { root } from '../../../ui/components';
+import { root } from '../../../ui/Components';
 
 export default function DetailScreen({ route, navigation }) {
   const { pubId } = route.params;

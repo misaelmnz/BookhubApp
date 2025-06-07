@@ -4,18 +4,28 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/loginScreen/LoginScreen';
 import CadastroScreen from '../screens/cadastroScreen/CadastroScreen';
 import FeedScreen from '../screens/storeScreen/FeedScreen';
-import DetailScreen from '../screens/storeScreen/detailScreen/DetailScreen'
+import SearchScreen from '../screens/storeScreen/searchScreen/SearchScreen';
+import ResultScreen from '../screens/storeScreen/resultsScreen/ResultScreen';
+import DetailScreen from '../screens/storeScreen/detailScreen/DetailScreen';
+import Item from '../screens/storeScreen/ItemCard';
+import PublicationScreen from '../screens/publicationScreen/publicationScreen';
+import { useAuth } from '../context/AuthContext';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
+  const { userToken } = useAuth();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Feed" component={FeedScreen} options={{headerShown: false}}/>
+      <Stack.Navigator initialRouteName={userToken ? "Feed" : "Login"} screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Feed" component={FeedScreen} options={{headerShown: false}} />
         <Stack.Screen name="Cadastro" component={CadastroScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Detalhe da publicação" component={DetailScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Pesquisa" component={SearchScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Resultado" component={ResultScreen} options={{ headerShown: false }}  />
+        <Stack.Screen name="Detalhe da publicação" component={DetailScreen} options={{ headerShown: false }}/>
+        <Stack.Screen name="Teste" component={Item} />
+        <Stack.Screen name="Publicação" component={PublicationScreen} options={{ headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
