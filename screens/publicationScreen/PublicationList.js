@@ -2,7 +2,7 @@ import { FlatList, View, Text} from "react-native";
 import React, {useEffect, useState} from "react";
 import PublicationCard from "./PublicationCard";
 import { useNavigation } from "@react-navigation/native";
-import { root } from "../../ui/Components";
+import { root } from "../../ui/components";
 import { fetchUserPubs } from "./publicationController/PublicationController";
 import { useAuth } from "../../context/AuthContext";
 

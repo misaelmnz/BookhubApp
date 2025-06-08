@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, SafeAreaView, StyleSheet, Modal, View, Touchable, TouchableOpacity, Alert } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { root, Line } from '../../ui/Components';
+import { root, Line } from '../../ui/components';
 import { useAuth } from '../../context/AuthContext'
 
 

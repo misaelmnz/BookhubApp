@@ -11,4 +11,3 @@ export const login = async (usuario, senha) => {
         return false;
     }
 };
-

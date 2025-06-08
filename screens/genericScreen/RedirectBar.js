@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, Image, Pressable, Text } from 'react-native';
-import { root } from '../../ui/Components';
+import { root } from '../../ui/components';
 import { useNavigation } from '@react-navigation/native';
 import { Entypo } from '@expo/vector-icons';
 
@@ -10,7 +10,7 @@ export const Lupa = () => {
     )
 }
 
-export function RedirectBar({ style, placeholder }) {
+export default function RedirectBar({ style, placeholder }) {
     const navigation = useNavigation();
     return (
         <Pressable style={[styles.container, style]} onPress={() => {navigation.navigate('Pesquisa')}}>

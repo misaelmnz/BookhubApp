@@ -1,4 +1,4 @@
-import { CardCustom, Shadow, root   } from "../../ui/Components";
+import { CardCustom, Shadow, root   } from "../../ui/components";
 import React from 'react';
 import { StyleSheet, Image, View, Text, Pressable } from 'react-native';
 import { Entypo } from '@expo/vector-icons';

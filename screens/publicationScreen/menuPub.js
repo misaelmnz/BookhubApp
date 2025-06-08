@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, StyleSheet, Text, View, TouchableOpacity, Pressable, Alert } from "react-native";
-import { root } from "../../ui/Components";
+import { root } from "../../ui/components";
 import { MenuOption } from "../genericScreen/menu";
 import { Entypo } from '@expo/vector-icons';
 import { deletePub, verifyPub } from "./publicationController/PublicationController";

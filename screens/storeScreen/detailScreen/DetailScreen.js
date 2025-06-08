@@ -5,11 +5,9 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import avatar from '../../../assets/avatar.png';
-import FooterDefault from "../../genericScreen/genericHeader";
+import FooterDefault from "../../genericScreen/Header";
 import { root } from '../../../ui/components';
-import { Entypo } from '@expo/vector-icons';
-import FooterDefault from '../../genericScreen/Header';
-import { root } from '../../../ui/components';
+import { Entypo } from '@expo/vector-icons'
 import { API_URL } from '../../../api/auth';
 
 export default function DetailScreen({ route, navigation }) {
@@ -94,6 +92,14 @@ export default function DetailScreen({ route, navigation }) {
     setSelectedImageIndex(index);
     setModalVisible(true);
   };
+
+  const Icon = ({name}) => {
+    return (
+      <View style={{alignSelf: 'center', marginRight: 5}}>
+      <Entypo name={name} size={14} color={root.C_BLACK}/>
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: root.C_WHITE }}>
@@ -190,11 +196,26 @@ export default function DetailScreen({ route, navigation }) {
 
           <Text style={styles.sectionTitle}>Detalhes</Text>
           <View style={styles.detailBox}>
-            <Text style={styles.detailText}>Autor(a): {item_autor}</Text>
-            <Text style={styles.detailText}>Editora: {item_editora}</Text>
-            <Text style={styles.detailText}>Data de Lançamento: {new Date(item_datadepublicacao).toLocaleDateString()}</Text>
-            <Text style={styles.detailText}>ISBN: {item_isbnCode}</Text>
-            <Text style={styles.detailText}>Condição: {item_status}</Text>
+            <View style={styles.textImageContainer}>
+              <Icon name={'bookmarks'}/>
+              <Text style={styles.detailText}>Autor(a): {item_autor}</Text>
+            </View>
+            <View style={styles.textImageContainer}>
+              <Icon name={'text-document'}/>
+              <Text style={styles.detailText}>Editora: {item_editora}</Text>
+            </View>
+            <View style={styles.textImageContainer}>
+              <Icon name={'calendar'}/>
+              <Text style={styles.detailText}>Data de Lançamento: {new Date(item_datadepublicacao).toLocaleDateString()}</Text>
+            </View>
+            <View style={styles.textImageContainer}>
+              <Icon name={'book'}/>
+              <Text style={styles.detailText}>ISBN: {item_isbnCode}</Text>
+            </View>
+            <View style={styles.textImageContainer}>
+              <Icon name={'info-with-circle'}/>
+              <Text style={styles.detailText}>Condição: {item_status}</Text>
+            </View>
           </View>
         </View>
 
@@ -207,6 +228,11 @@ export default function DetailScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+  textImageContainer: {
+    flexDirection: 'row',
+    marginBottom: 5,
+  }, 
+
   header: {
     fontSize: 25,
     fontWeight: 'bold',
@@ -331,7 +357,6 @@ const styles = StyleSheet.create({
   detailText: {
     fontSize: 14,
     color: root.C_BLACK,
-    marginBottom: 5
   },
   title: {
     fontSize: 20,

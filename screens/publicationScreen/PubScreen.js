@@ -1,6 +1,6 @@
 import { ScrollView, View, Text, StyleSheet, Pressable } from 'react-native';
 import HeaderDefault from "../genericScreen/Header";
-import { Line, root } from '../../ui/Components';
+import { Line, root } from '../../ui/components';
 import { Entypo } from '@expo/vector-icons';
 import PublicationList from './PublicationList';
 export default function PublicationMain() {
