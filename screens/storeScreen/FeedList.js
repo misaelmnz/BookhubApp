@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ScrollView, Alert, StyleSheet, Text } from 'react-native';
 import ItemCard from './ItemCard';
-import { Container, Line } from '../../ui/Components';
-import { root, TextCustom } from '../../ui/Components';
+import { Container, Line, root, TextCustom } from '../../ui/components';
 import { fetchFeedItem } from './storeController/StoreController'
 
 export default function Feed({ navigation }) {

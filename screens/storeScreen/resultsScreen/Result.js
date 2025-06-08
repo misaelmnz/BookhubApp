@@ -1,6 +1,6 @@
 import { FlatList, View, Text, Button } from "react-native";
 import ResultCard from "./ResultCard";
-import { root } from "../../../ui/Components";
+import { root } from "../../../ui/components";
 import { useNavigation } from "@react-navigation/native";
 
 

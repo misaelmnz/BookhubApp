@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import { root, TextCustom, Container } from '../../ui/Components';
+import { root, TextCustom, Container } from '../../ui/components';
 
 export default function Logo() {
   return (

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { Container, root, TextCustom } from '../../../ui/Components';
+import { Container, root, TextCustom } from '../../../ui/components';
 import SearchBar from '../../genericScreen/searchbar';
 
 export default function SearchHeader({ Search, style, searchQuery, editable = true, SearchText}) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
-import { CardCustom, Shadow, root } from '../../ui/Components';
+import { CardCustom, Shadow, root } from '../../ui/components';
 import { useNavigation } from '@react-navigation/native';
 
 export default function ItemCard({ id, titulo='', tipo='', tipoVenda='', valor='', imagem, onPress }) {

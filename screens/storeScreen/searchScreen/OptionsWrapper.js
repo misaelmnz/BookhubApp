@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
-import { root, TextCustom, Container } from '../../../ui/Components';
+import { root, TextCustom, Container } from '../../../ui/components';
 import OptionButton from './OptionsButton';
 import { useState, useEffect } from 'react';
 
