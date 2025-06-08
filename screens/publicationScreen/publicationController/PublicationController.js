@@ -30,10 +30,27 @@ export async function updatePubs () {
     }
 }
 
-export async function deletePubs () {
+export async function deletePub (item_id) {
     try {
+        const token = await getToken();
+        const response = await axios.delete(`${API_URL}/deletePubs`, 
+            { headers: {Authorization: `User ${token}`}, data: {item_id: item_id}});
+        console.log(token)
+        const data = response;
+        return data;
+    } catch(err) {
+        console.error('delete: ', err)
+    }
+}
 
+export async function verifyPub (pub_id) {
+    try {
+        const response = await axios.post(`${API_URL}/verifyPub`,
+            {pub_id: pub_id});
+        const data = response.data
+        return data;
     } catch(err) {
         console.log(err)
     }
+    
 }

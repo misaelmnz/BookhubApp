@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Modal, StyleSheet, Text, View, TouchableOpacity, Pressable } from "react-native";
+import { Modal, StyleSheet, Text, View, TouchableOpacity, Pressable, Alert } from "react-native";
 import { root } from "../../ui/Components";
 import { MenuOption } from "../genericScreen/menu";
 import { Entypo } from '@expo/vector-icons';
+import { deletePub, verifyPub } from "./publicationController/PublicationController";
 
 export const PubButton = ({ onPress, name, navigateTo, color=root.C_WHITE, style = styles.button}) => {
     return (
@@ -14,16 +15,64 @@ export const PubButton = ({ onPress, name, navigateTo, color=root.C_WHITE, style
     )
 }
 
-export default function PubMenu() {
-    const [visible, 
-        setVisible] = useState(false);
+const excluirAlert = (setVisible, pub_id, item_id) => {
+
+    const handleVerify = async () => {
+        try {
+            const response = await verifyPub(pub_id);
+            const exist = response.success;
+            console.log('response: ', exist);
+                if (exist !== undefined) {
+                    return true;
+                } else {
+                    return false;
+                }
+        } catch(err) {
+            console.error(err);
+            return false;
+        }
+    }
+
+    const handleDelete = async () => {
+    try {                   
+        if (item_id && item_id !== null && item_id !== undefined) {
+            setVisible(false);
+            await deletePub(item_id);
+            if (await handleVerify()) {
+                console.log(item_id)
+                return Alert.alert('Erro', 'Essa publicação não foi excluída.');
+            }
+                return Alert.alert('Sucesso', 'Publicação excluída com sucesso.');
+            } else {
+                return Alert.alert('Erro', 'ID inválido. Não foi possível excluir a publicação.');
+            }
+        } catch (err) {
+            Alert.alert('Erro', 'Não foi possível excluir a publicação. Tente novamente mais tarde.');
+            console.log(err);
+        }
+    }
+
+    Alert.alert('Excluir', 'Tem certeza que deseja excluir essa publicação?', [
+        { 
+            text: 'Cancelar',
+        },
+        {
+            text: 'Sim',
+            onPress: handleDelete
+        }
+    ]);
+};
+
+export default function PubMenu({item_id, pub_id}) {
+
+    const [visible, setVisible] = useState(false);
 
     return (
     <View>
         <PubButton onPress={() => {setVisible(!visible)}} name="dots-three-vertical" color={root.C_BLACK} style={styles.threeDots}/>
             
         <Modal
-            animationType="none"
+            animationType="fade"
             transparent={true}
             visible={visible}
             onRequestClose={() => {
@@ -33,7 +82,9 @@ export default function PubMenu() {
                     <View style={styles.menuContainer}>
                         <View style={styles.menuBox}>
                             <MenuOption onPress={() => {}} Texto="Editar" name="edit" />
-                            <MenuOption onPress={() => {}} Texto="Excluir" name="trash" />
+                            <MenuOption onPress={() => {
+                            excluirAlert(setVisible, pub_id, item_id);
+                            }} Texto="Excluir" name="trash" />
                         </View>
                     </View>
             </TouchableOpacity>

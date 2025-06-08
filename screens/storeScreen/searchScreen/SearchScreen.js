@@ -49,6 +49,7 @@ export default function Screen({ navigation }) {
             searchText: searchText,
             data: response
         });
+        
     } catch (err) {
         console.error("Erro ao buscar resultados:", err);
         Alert.alert("Erro", "Não foi possível realizar a pesquisa. Tente novamente mais tarde.");

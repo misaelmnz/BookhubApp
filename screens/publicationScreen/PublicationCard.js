@@ -5,7 +5,7 @@ import { Entypo } from '@expo/vector-icons';
 import PubMenu from "./menuPub";
 
 export default function PublicationCard(
-    {imagem, title='Titulo', id, onPress}
+    {imagem, title='Titulo', pub_id, item_id, onPress}
 ) {
 
     return (
@@ -26,7 +26,7 @@ export default function PublicationCard(
                         numberOfLines={1}
                         ellipsizeMode="tail"
                         >{title}</Text>
-                        <PubMenu/>  
+                        <PubMenu pub_id={pub_id} item_id={item_id} />  
                     </View>
                 </View>
                 </CardCustom>

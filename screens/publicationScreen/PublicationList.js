@@ -22,8 +22,6 @@ useEffect(() => {
     loadPubs();
 }, []);
 
-console.log("Publicações:", data);
-
 return (
     <View>
         <FlatList
@@ -39,8 +37,8 @@ return (
                 <PublicationCard
                     imagem={item.imagem_caminho}
                     title={item.pub_titulo}
-                    id={item.pub_id}
-                    onPress={() => navigation.navigate('DetailScreen', { pubId: item.pub_id })}
+                    item_id={item.item_id}
+                    pub_id={item.pub_id}
                 />
             )}
             ListEmptyComponent={
