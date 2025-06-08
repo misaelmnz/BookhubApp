@@ -3,7 +3,10 @@ import HeaderDefault from "../genericScreen/Header";
 import { Line, root } from '../../ui/components';
 import { Entypo } from '@expo/vector-icons';
 import PublicationList from './PublicationList';
+import { useNavigation } from '@react-navigation/native';
+
 export default function PublicationMain() {
+    const navigate = useNavigation();
 
     return (
         <View style={{flex: 1, backgroundColor: root.C_WHITE}}>
@@ -15,7 +18,7 @@ export default function PublicationMain() {
                     </View>
                     <View style={styles.containerButton}>
                             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                            <PubButton onPress={() => {}} name="plus" navigateTo="CreatePublication"/>
+                            <PubButton onPress={() => navigate.navigate('Criar Publicação')} name="plus"/>
                             <Text style={styles.content}>Criar publicação</Text>
                             </View>
                             
@@ -34,15 +37,16 @@ export default function PublicationMain() {
     );
 }
 
-export const PubButton = ({ onPress, name, navigateTo, color=root.C_WHITE, style = styles.button}) => {
+export const PubButton = ({ onPress, name, color=root.C_WHITE, style = styles.button}) => {
     return (
-        <Pressable onPress={() => {onPress(navigateTo)}}>
+        <Pressable onPress={() => {onPress()}}>
             <View style={[style, {marginHorizontal: 5}]}>
                 <Entypo name={name} size={20} color={color}/>
             </View>
         </Pressable>
     )
 }
+
  
 const styles = StyleSheet.create({
     container: {
