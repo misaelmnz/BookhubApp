@@ -3,15 +3,21 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image, Pressable, Text, TextInput} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { root } from "../../../ui/components";
-
-export function InputBlock({Description, onPress}) {
+import DateTimePicker from '@react-native-community/datetimepicker'
+export function InputBlock({ Description, onPress, selected }) {
     return (
-        <Pressable onPressOut={onPress}>
-            <View style={[styles.border, styles.inputBlockContainer, styles.shadow]}>
-                <Text style={[styles.textStyle]}>{Description}</Text>
-            </View>
+        <Pressable
+            onPressOut={onPress}
+            style={({ pressed }) => [
+                styles.inputBlockContainer,
+                styles.border,
+                selected && styles.selectedBlock,
+                pressed && { opacity: 0.7 }
+            ]}
+        >
+            <Text style={[styles.textStyleWhite, styles.textSize]}>{Description}</Text>
         </Pressable>
-    )
+    );
 }
 
 export function InputButton({Description, onPress}) {
@@ -24,15 +30,15 @@ export function InputButton({Description, onPress}) {
     )
 }
 
-export function InputText({Description, Validate, Value, onChange}) {
+export function InputText({Description, value, onChange, maxLength=25}) {
     return (
         <View style={[styles.border, styles.inputTextContainer]}>
             <TextInput
             placeholder={Description}
             placeholderTextColor={'grey'}
-            value={Validate}
-            onChange={onChange}
-            maxLength={25}
+            value={value}
+            onChangeText={onChange}
+            maxLength={maxLength}
             style={styles.textStyleGrey}
             />
         </View>
@@ -45,11 +51,28 @@ export function TitleText({Description}) {
     )
 }
 
-export function SetDate() {
+export function SetDate({ value, onChange, showDatePicker, setShowDatePicker}) {
+    const handleChange = (event, selectedDate) => {
+        setShowDatePicker(false)
+    if (event.type === 'set' && selectedDate) {
+      onChange(selectedDate);
+    }
+};
+
     return (
-        <View style={[styles.border]}>
-            
-        </View>
+        <Pressable onPress={() => setShowDatePicker(true)} style={[styles.inputTextContainer, styles.border]}>
+            <Text style={[styles.textStyleGrey, {color: 'grey'}]}>{value ? value.toLocaleDateString('pt-BR') : 'Data de Publicação'}</Text>
+            {showDatePicker && (
+        <DateTimePicker
+          mode="date"
+          value={value || new Date()}
+          display="spinner"
+          onChange={handleChange}
+          maximumDate={new Date()}
+          locale="pt-BR"
+        />
+      )}
+        </Pressable>
     )
 }
 
@@ -73,6 +96,25 @@ export function GoBack({onPress}) {
     )
 }
 
+export function Cancelar({onPress}) {
+    return (
+        <Pressable onPressOut={onPress} style={({ pressed }) => ({opacity: pressed ? 0.5 : 1,})}>
+            <View style={[styles.border, styles.stepButton]}>
+                <Text style={[styles.textStyle, styles.textStyleWhite]}>Cancelar</Text>
+            </View>
+    </Pressable>
+    )
+}
+
+export function Describe({Title, Describe}) {
+    return (
+        <View style={{flexDirection: 'column', alignContent: 'center', alignItems: 'flex-start'}}>
+            <Text style={[styles.textStyle, {fontSize: 12, marginRight: 10, fontFamily: root.C_FONT_LIST.Bold}]}>{Title}</Text>
+            <Text style={[styles.textStyle, styles.textShowcase, {fontSize: 12, color: '#A9A9A9'}]}>{Describe}</Text>
+        </View>
+    )
+}
+
 const styles = StyleSheet.create({
     textStyle: {
         fontFamily: root.C_FONT_LIST.Medium,
@@ -87,14 +129,23 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },  
 
+    textSize: {
+        fontSize: 20
+    },
+
     border: {
         borderRadius: 10,
     },
 
+    borderWidth: {
+        borderWidth: 1,
+        borderColor: root.C_BLACK,
+    },  
+
     inputBlockContainer: {
         width: 200,
         height: 100,
-        backgroundColor: root.C_WHITE,
+        backgroundColor: root.C_MAIN_COLOR,
         padding: 20,
         justifyContent: 'center',
         alignItems: 'center'
@@ -138,5 +189,20 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: root.C_BLACK,
         marginBottom: 10,
+    },
+
+    selectedBlock: {
+        backgroundColor: '#f28941',
+        borderWidth: 2,
+        borderColor: root.C_SUB_COLOR,
+    },
+
+    textShowcase: {
+        borderWidth: 1,
+        borderColor: '#E8E9E8',
+        backgroundColor: root.C_WHITE,
+        width: '100%',
+        padding: 5,
+        borderRadius: 10,
     }
 })

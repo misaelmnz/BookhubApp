@@ -13,15 +13,15 @@ export default function RenderForm({navigation}) {
     const [step, setStep] = useState(0);
     const totalStep = 3; // DEPOIS VAI SER CONTADO
     const [form, setForm] = useState({
-    item_isbnCode: "",
-    item_titulo: "",
-    item_autor: "", 
-    item_editora: "",
-    item_datadepublicacao: "",
-    item_status: "",
-    item_tipo: "", 
-    item_id: "",
-    imagem_caminho: "",
+    item_isbnCode: "", //
+    item_titulo: "", //
+    item_autor: "", //
+    item_editora: "", //
+    item_datadepublicacao: null, //
+    item_status: "", //
+    item_tipo: "", //
+    item_id: "", 
+    imagem_caminho: "", 
     pub_tipo: "",
     pub_titulo: "",
     pub_valor: "",
@@ -45,6 +45,15 @@ export default function RenderForm({navigation}) {
         return setStep(step - 1);
     }
 
+    const reset = () => {
+        const field = {};
+        Object.keys(form).forEach(key => {
+            field[key] = null;
+        });
+        setForm(field);
+        return navigate.navigate('Publicação')
+    }
+
     /* Lógica do Render
         Que tipo de item deseja publicar?
         1. Coleção ou Livro?
@@ -59,22 +68,36 @@ export default function RenderForm({navigation}) {
     function renderStep() {
         switch (step) {
             case 0: // -- Set item_tipo (Coleção ou Livro?)
-                return (<ScreenZero goFoward={goFoward} goBack={goBack}></ScreenZero>)
-            case 1:    
-                return (<ScreenOne goFoward={goFoward} goBack={goBack}></ScreenOne>
-                )
-            case 2: 
-                return (<ScreenTwo goFoward={goFoward} goBack={goBack}></ScreenTwo>                    
-                )
-            case 3:
-                return (<ScreenThree goFoward={goFoward} goBack={goBack}></ScreenThree>
-                )
+                return (<ScreenZero goFoward={goFoward} 
+                    goBack={goBack} 
+                    form={form} 
+                    setForm={setForm} ></ScreenZero>)
+            case 1: // -- Set item (Todas as informações sobre item) 
+                return (<ScreenOne goFoward={goFoward} 
+                    goBack={goBack} 
+                    form={form} 
+                    setForm={setForm}></ScreenOne>)
+            case 2: // -- Mostrar as informações escritas até agora sobre o livro
+                return (<ScreenTwo goFoward={goFoward} 
+                    goBack={goBack}
+                    form={form} 
+                    setForm={setForm}
+                    reset={reset}></ScreenTwo>)
+            case 3: // -- Set pub (Principais informações de pub)
+                return (<ScreenThree goFoward={goFoward} 
+                    goBack={goBack} 
+                    form={form} 
+                    setForm={setForm}></ScreenThree>)
             case 4:
-                return (<ScreenFour goFoward={goFoward} goBack={goBack}></ScreenFour>
-                )
+                return (<ScreenFour goFoward={goFoward} 
+                    goBack={goBack} 
+                    form={form} 
+                    setForm={setForm}></ScreenFour>)
             case 5:
-                return (<ScreenFive goFoward={goFoward} goBack={goBack}></ScreenFive>
-                )
+                return (<ScreenFive goFoward={goFoward} 
+                    goBack={goBack} 
+                    form={form} 
+                    setForm={setForm}></ScreenFive>)
     }}
     
     return (

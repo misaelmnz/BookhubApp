@@ -12,7 +12,7 @@ export default function PublicationCard(
         <Pressable onPress={onPress}>
             <Shadow style={styles.shadow}>  
                 <CardCustom style={styles.card}>
-                <View style={styles.container}>
+                <View style={[styles.container]}>
                     <View>
                         <Image source={{ uri: imagem }} style={styles.imageContainer} />
                     </View>

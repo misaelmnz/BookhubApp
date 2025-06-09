@@ -1,35 +1,80 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { StyleSheet, View, Image, Pressable, Text} from "react-native";
+import { StyleSheet, View, Image, Pressable, Text, Alert} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { root } from "../../../ui/components";
-import { GoBack, GoFoward, InputBlock, InputButton, InputText, TitleText } from "./CreateFormTemplate";
+import { Cancelar, Describe, GoBack, GoFoward, InputBlock, InputButton, InputText, SetDate, TitleText } from "./CreateFormTemplate";
 import OptionsList from "../../storeScreen/searchScreen/OptionsWrapper";
+/*
+Utilizar handleForm junto da const isValid nos containers de etapa.
+*/
+function handleForm(form, formField = []) { 
+    const field = formField.length > 0 ? formField : Object.keys(form);
 
-export default function FormScreen({onPress, goFoward, goBack}) {
-    
+    for (let field of formField) {
+        if (
+            form[field] === undefined ||
+            form[field] === null || 
+            (typeof form[field] === "string" && form[field].trim() === "") || 
+            (Array.isArray(form[field]) && form[field.length === 0])
+        ) {
+            return false;
+        }
+    }
+    return true;
 }
 
-
-export function ScreenZero({onPress, goFoward, goBack}) {
-
-    const [itemTipo, setItemTipo] = React.useState(null);
+export function ScreenZero({goFoward, goBack, form, setForm}) {
+    
+    const formField = ["item_tipo"]
+    const handleGoFoward = () => {
+        if (!handleForm(form, formField)) {
+            return Alert.alert("Erro", "Preencher todos os campos")
+        }
+        goFoward()
+    }
 
     return (
         <View style={styles.formContainer}>
-            <View style={styles.container}>
-                <InputBlock/>
-                <InputBlock/>
+            <View style={[styles.container]}>
+                <View style={styles.spaceSort}>
+                    <TitleText Description={'Coleção ou Livro?'}/>
+                    <View style={[styles.spaceSort, {width: '100%', height: '100%', alignItems: 'center'}]}>
+                    <InputBlock Description={'LIVRO'} 
+                    onPress={()=> setForm({ ...form, item_tipo: 0})}
+                    selected={form.item_tipo === 0}/>
+                    <InputBlock Description={'COLEÇÃO'} 
+                    onPress={()=> setForm({ ...form, item_tipo: 3})}
+                    selected={form.item_tipo === 3}/>
+                    </View>
+                </View>
             </View>
             <View style={styles.stepContainer}>
                 <GoBack onPress={goBack}/>   
-                <GoFoward onPress={goFoward}/>
+                <GoFoward onPress={handleGoFoward}/>
             </View>
         </View>
     )
 }
 
-export function ScreenOne({onPress, goFoward, goBack}) {
+export function ScreenOne({onPress, goFoward, goBack, form, setForm}) {
+    const [showDatePicker, setShowDatePicker] = useState(false);
+    const formField = [
+        "item_titulo", 
+        "item_autor", 
+        "item_isbnCode", 
+        "item_editora", 
+        "item_status", 
+        "item_datadepublicacao"]
+
+
+    const handleGoFoward = () => {
+        if (!handleForm(form, formField)) {
+            return Alert.alert("Erro", "Preencher todos os campos")
+        }
+        goFoward()
+    }
+
     return (
         <View style={styles.formContainer}>
             <View style={styles.container}>
@@ -37,12 +82,50 @@ export function ScreenOne({onPress, goFoward, goBack}) {
                     <TitleText Description={'Descreva seu item'}/>
                 </View>
                 <View style={styles.spaceSort}>
-                    <InputText Description={'Nome da Coleção/Livro'}/>
-                    <InputText Description={'Nome do Autor'}/>
                     {
-                        <InputText Description={''}/>
+                        form.item_tipo === 3 ? 
+                            <InputText 
+                            Description={'Nome da Coleção'}
+                            value={form.item_titulo}
+                            onChange={text => setForm({...form, item_titulo: text})}
+                            /> :
+                            <InputText 
+                            Description={'Nome do Livro'}
+                            value={form.item_titulo}
+                            onChange={text => setForm({...form, item_titulo: text})}
+                            />  
                     }
-                    <InputText Description={'Nome da Editora'}/>
+                    <InputText 
+                    Description={'Nome do Autor'}
+                    value={form.item_autor}
+                    onChange={text => setForm({...form, item_autor: text})}
+                    
+                    />
+                    {
+                        form.item_tipo === 0 ?
+                        <InputText 
+                        Description={'ISBN'}
+                        value={form.item_isbnCode}
+                        maxLength={11}
+                        onChange={text => setForm({...form, item_isbnCode: text})}
+                        /> : null
+                    }
+                    <InputText 
+                    Description={'Nome da Editora'}
+                    value={form.item_editora}
+                    onChange={text => setForm({...form, item_editora: text})}
+                    />
+                    <InputText 
+                    Description={'Estado de Conservação'}
+                    value={form.item_status}
+                    onChange={text => setForm({...form,item_status: text })}
+                    />
+                    <SetDate
+                    value={form.item_datadepublicacao}
+                    onChange={date => setForm({ ...form, item_datadepublicacao: date })}
+                    showDatePicker={showDatePicker}
+                    setShowDatePicker={setShowDatePicker}
+                    />
                 </View>
             </View>
             <View style={styles.stepContainer}>
@@ -53,13 +136,33 @@ export function ScreenOne({onPress, goFoward, goBack}) {
     )
 }
 
-export function ScreenTwo({onPress, goFoward, goBack}) {
+// ETAPA DE VISUALIZAÇÃO
+export function ScreenTwo({onPress, goFoward, goBack, form, setForm, reset}) {
+
+
     return (
         <View style={styles.formContainer}>
             <View style={styles.container}>
-                <InputText Description={'b'}/>
+                <View style={[{height: '20%', width: '100%', position: 'absolute', borderRadius: 30, justifyContent: 'center'}]}>
+                    <TitleText Description={"É isso que deseja?"}/>
+                </View>
+                <View>
+                    <Image source={require("../../../assets/illustration2.png")} style={styles.imageContainer}/>
+                </View>
+                <View style={[{backgroundColor: root.C_GREY,height: '50%', width: '100%', position: 'absolute', borderRadius: 30, top: '48%',borderWidth: 4, borderColor: root.C_MAIN_COLOR, padding: 20}]}>
+                    <View style={{justifyContent: 'space-between', height: '100%'}}>
+                    <Describe Describe={form.item_titulo} Title={"Título do Item: "}></Describe>
+                    <Describe Describe={form.item_autor} Title={"Nome do Autor:"}></Describe>
+                    <Describe Describe={form.item_editora} Title={"Nome da Editora:"}></Describe>
+                    <Describe Describe={form.item_status} Title={"Estado de Conservação:"}></Describe>
+                    <Describe Describe=
+                    {form.item_datadepublicacao ? form.item_datadepublicacao.toLocaleDateString('pt-BR') :
+                    ""} Title={"Data de Publicação"}></Describe>
+                    </View>
+                </View>
             </View>
             <View style={styles.stepContainer}>
+                <Cancelar onPress={reset}/>
                 <GoBack onPress={goBack}/>   
                 <GoFoward onPress={goFoward}/>
             </View>
@@ -67,17 +170,18 @@ export function ScreenTwo({onPress, goFoward, goBack}) {
     )
 }
 
-export function ScreenThree({onPress, goFoward, goBack}) {
+export function ScreenThree({onPress, goFoward, goBack, form, setForm}) {
     const [selectedGenres, setSelectedGenres] = useState([]);
 
-    function toggleGenre(id) {
-    setSelectedGenres(prev =>
-        prev.includes(id)
-            ? prev.filter(g => g !== id)
-            : [...prev, id]
-        );
-    }
-
+    const toggleGenre = id => {
+    const current = Array.isArray(form.genero_id) ? form.genero_id : [];
+    setForm({
+        ...form,
+        genero_id: current.includes(id)
+            ? current.filter(g => g !== id)
+            : [...current, id]             
+    });
+};
 
     return (
         <View style={styles.formContainer}>
@@ -86,7 +190,7 @@ export function ScreenThree({onPress, goFoward, goBack}) {
                     <TitleText Description={'Escolha um gênero'}/>
                 </View>
                 <View style={{alignSelf: 'center'}}>
-                <OptionsList selectedGenres={selectedGenres} toggleGenre={toggleGenre} />
+                <OptionsList selectedGenres={form.genero_id || []} toggleGenre={toggleGenre} />
                 </View>
             </View>
             <View style={styles.stepContainer}>
@@ -114,12 +218,19 @@ const styles = StyleSheet.create({
         height: '20%',
         width: '100%',
         justifyContent: 'space-evenly',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderTopWidth: 3,
+        borderColor: root.C_GREY
     },
     spaceSort: {
         flexDirection: 'column',
         justifyContent: 'space-evenly',
-        height: '60%'
-    }
-
+        height: '80%'
+    },
+    imageContainer: {
+        resizeMode: 'contain',
+        alignSelf: 'center',
+        width: '80%',
+        height: '100%'
+    },
 })
