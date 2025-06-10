@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image, Pressable, Text, Alert} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { root } from "../../../ui/components";
-import { Cancelar, Describe, GoBack, GoFoward, InputBlock, InputButton, InputText, SetDate, TitleText } from "./CreateFormTemplate";
+import { Cancelar, Describe, GoBack, GoFoward, ImageSelector, InputBlock, InputButton, InputText, SetDate, TitleText } from "./CreateFormTemplate";
 import OptionsList from "../../storeScreen/searchScreen/OptionsWrapper";
+import * as ImagePicker from 'expo-image-picker';
+import { upload } from '../publicationController/PublicationController'
 /*
 Utilizar handleForm junto da const isValid nos containers de etapa.
 */
@@ -158,7 +160,7 @@ export function ScreenTwo({onPress, goFoward, goBack, form, setForm, reset}) {
                     <Describe Describe=
                     {form.item_datadepublicacao ? form.item_datadepublicacao.toLocaleDateString('pt-BR') :
                     ""} Title={"Data de Publicação"}></Describe>
-                    </View>
+                    </View> 
                 </View>
             </View>
             <View style={styles.stepContainer}>
@@ -187,7 +189,7 @@ export function ScreenThree({onPress, goFoward, goBack, form, setForm}) {
         <View style={styles.formContainer}>
             <View style={styles.container}>
                 <View>
-                    <TitleText Description={'Escolha um gênero'}/>
+                    <TitleText Description={'Escolha os gêneros'}/>
                 </View>
                 <View style={{alignSelf: 'center'}}>
                 <OptionsList selectedGenres={form.genero_id || []} toggleGenre={toggleGenre} />
@@ -201,6 +203,113 @@ export function ScreenThree({onPress, goFoward, goBack, form, setForm}) {
     )
 }
 
+export function ScreenFour({goFoward, goBack, form, setForm}) {
+    return (
+
+        <View style={styles.formContainer}>
+            <View style={styles.container}>
+                <View>
+                    <TitleText Description={'Política de Negócio'}/>
+                </View>
+
+                <View style={styles.spaceSort}>
+                    <View style={[styles.spaceSort, {width: '100%', height: '100%', alignItems: 'center'}]}>
+                    <InputBlock Description={'DOAÇÃO'} 
+                    onPress={()=> setForm({ ...form, pub_tipo: 0})}
+                    selected={form.pub_tipo === 0}/>
+                    <InputBlock Description={'VENDA'} 
+                    onPress={()=> setForm({ ...form, pub_tipo: 1})}
+                    selected={form.pub_tipo === 1}/>
+                    <InputBlock Description={'TROCA'} 
+                    onPress={()=> setForm({ ...form, pub_tipo: 2})}
+                    selected={form.pub_tipo === 2}/>
+                    </View>
+                </View>
+            </View>
+
+            <View style={styles.stepContainer}>
+                <GoBack onPress={goBack}/>   
+                <GoFoward onPress={goFoward}/>
+            </View>
+        </View>
+    )
+}
+
+export function ScreenFive({goFoward, goBack, form, setForm}) {
+    return (    
+        <View style={styles.formContainer}>
+            <View style={styles.container}>
+                <View>
+                    <TitleText Description={'Detalhe sua Publicação'}/>
+                    <View style={styles.spaceSort}>
+
+                    <InputText 
+                    Description={'Dê um título a sua Publicação'}
+                    value={form.pub_titulo}
+                    onChange={text => setForm({...form, pub_titulo: text})}
+                    />
+
+                    <InputText 
+                    Description={'Descreva sua Publicação aqui'}
+                    value={form.pub_descricao}
+                    onChange={text => setForm({...form, pub_descricao: text })}
+                    multiline={true}
+                    maxLength={250}
+                    />
+                    {
+                        form.pub_tipo === 1 ? 
+                        <InputText 
+                        Description={'Digite um Valor'}
+                        value={form.pub_valor}
+                        onChange={text => setForm({...form, pub_valor: text})}
+                        keyboardType="numeric"
+                        /> : null
+                    }
+                    </View>
+                </View>
+            </View>
+            <View style={styles.stepContainer}>
+                <GoBack onPress={goBack}/>   
+                <GoFoward onPress={goFoward}/>
+            </View>
+        </View>
+    )
+}
+
+export function ScreenSix({goFoward, goBack, form, setForm}) {
+
+        const pickImage = async () => {
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ['images'],
+                quality: 1,
+                allowsEditing: true,
+            });
+            
+            if(!result.canceled && result.assets && result.assets.length > 0) {
+                const uri = result.assets[0].uri;
+                const link = await upload(uri);
+                setForm({...form, imagem_caminho: link})
+            } 
+    }
+
+    
+    return (
+        <View style={styles.formContainer}>
+        <View style={styles.container}>
+            <TitleText Description={"Escolha as imagens da sua publicação"}></TitleText>
+            <Text>Priorize fotografar a capa do livro ou apenas a lambada da coleção.</Text>
+            <View style={[styles.spaceSort, {alignSelf: 'center'}]}>
+            <ImageSelector onPress={pickImage}>
+            </ImageSelector>
+            </View>
+        </View>
+        <View style={styles.stepContainer}>
+            <GoBack onPress={goBack}/>   
+            <GoFoward onPress={goFoward}/>
+        </View>
+    </View>
+    )
+}
 
 const styles = StyleSheet.create({
     formContainer: {

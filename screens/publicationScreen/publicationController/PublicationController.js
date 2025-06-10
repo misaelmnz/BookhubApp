@@ -54,3 +54,27 @@ export async function verifyPub (pub_id) {
     }
     
 }
+
+export async function upload (imagem_caminho) {
+    try {
+        const data = new FormData();
+        data.append('file', {
+            uri: imagem_caminho,
+            type: 'image/jpeg',
+            name: 'upload.jpg',
+        });
+        
+        data.append('upload_preset', 'bookhub');
+        data.append('cloud_name', 'df36nmvkh');
+        
+        const response = await fetch('https://api.cloudinary.com/v1_1/df36nmvkh/image/upload',{
+        method: 'POST',
+        body: data,
+    })
+
+    const arquivos = await response.json();
+    return arquivos.secure_url;
+        } catch (err) {
+        throw new Error(err);
+    }
+}

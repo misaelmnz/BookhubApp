@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image, Pressable, Text, TextInput} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { root } from "../../../ui/components";
-import DateTimePicker from '@react-native-community/datetimepicker'
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { Entypo } from '@expo/vector-icons';
+
 export function InputBlock({ Description, onPress, selected }) {
     return (
         <Pressable
@@ -30,16 +32,18 @@ export function InputButton({Description, onPress}) {
     )
 }
 
-export function InputText({Description, value, onChange, maxLength=25}) {
+export function InputText({Description, value, onChange, maxLength=25, multiline = false, keyboardType = "default"}) {
     return (
         <View style={[styles.border, styles.inputTextContainer]}>
             <TextInput
-            placeholder={Description}
-            placeholderTextColor={'grey'}
-            value={value}
-            onChangeText={onChange}
-            maxLength={maxLength}
-            style={styles.textStyleGrey}
+                placeholder={Description}
+                placeholderTextColor={'grey'}
+                value={value}
+                onChangeText={onChange}
+                maxLength={maxLength}
+                style={styles.textStyleGrey}
+                multiline={multiline}
+                keyboardType={keyboardType}
             />
         </View>
     )
@@ -115,6 +119,18 @@ export function Describe({Title, Describe}) {
     )
 }
 
+export function ImageSelector({onPress}) {
+    return (
+        <View>
+            <Pressable onPress={onPress} style={styles.containerImagePicker}>
+                <View style={[styles.centralize,{width: '100%', height: '100%'}]}>
+                    <Text style={[styles.textStyle, {marginLeft: 10}]}>Enviar Imagem</Text>
+                    <Entypo name="folder-images" size={30} color={root.C_BLACK}/>
+                </View>
+            </Pressable>
+        </View>
+    )
+}
 const styles = StyleSheet.create({
     textStyle: {
         fontFamily: root.C_FONT_LIST.Medium,
@@ -174,7 +190,7 @@ const styles = StyleSheet.create({
 
     inputTextContainer: {
         width: '100%',
-        height: 50,
+        minHeight: 50,
         backgroundColor: root.C_WHITE,
         borderWidth: 3,
         borderColor: root.C_GREY,
@@ -186,7 +202,7 @@ const styles = StyleSheet.create({
     TitleText: {
         alignSelf: 'center',
         fontFamily: root.C_FONT_LIST.Bold,
-        fontSize: 30,
+        fontSize: 28,
         color: root.C_BLACK,
         marginBottom: 10,
     },
@@ -204,5 +220,21 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 5,
         borderRadius: 10,
+    },
+
+    containerImagePicker: {
+        width: '100%',
+        aspectRatio: 1,
+        maxHeight: 300,
+        borderWidth: 4,
+        borderColor: root.C_PURPLE,
+        borderRadius: '10%',
+        borderStyle: 'dotted',
+    },
+
+    centralize: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row-reverse'
     }
 })
