@@ -47,7 +47,7 @@ export default function ResultCard({
                         }
                       }
                   >
-                    <Text style={styles.order}>Fazer pedido</Text>
+                    <Text style={styles.order}>Ver detalhes</Text>
                   </ButtonCustom>
             </Container>
       </CardCustom>

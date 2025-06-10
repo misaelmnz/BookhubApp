@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import avatar from '../../../assets/avatar.png';
-import FooterDefault from "../../genericScreen/genericHeader";
+import HeaderDefault from "../../genericScreen/genericHeader";
 import { root } from '../../../ui/components';
 import { Entypo } from '@expo/vector-icons'
 
@@ -19,7 +19,7 @@ export default function DetailScreen({ route, navigation }) {
   const [modalActiveIndex, setModalActiveIndex] = useState(0);
 
   useEffect(() => {
-    axios.get(`http://192.168.172.166:3000/detalhesPUB/${pubId}`)
+    axios.get(`http://192.168.15.13:3000/detalhesPUB/${pubId}`)
       .then(response => {
         setDetalhes(response.data.data);
       })
@@ -94,7 +94,7 @@ export default function DetailScreen({ route, navigation }) {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: root.C_WHITE }}>
-      <FooterDefault />
+      <HeaderDefault />
 
       <ScrollView contentContainerStyle={{ flexGrow: 1, padding: 20 }}>
         <Text style={styles.header}>{pub_titulo}</Text>
