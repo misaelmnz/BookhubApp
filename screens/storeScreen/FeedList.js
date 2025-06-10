@@ -4,12 +4,13 @@ import ItemCard from './ItemCard';
 import { Container, Line, root, TextCustom } from '../../ui/components';
 import { fetchFeedItem } from './storeController/StoreController'
 
-export default function Feed({ navigation }) {
+export default function Feed({ navigation, tipo }) {
     const [PUBS, SET_PUBS] = useState([]);
+
     useEffect(() => {
         async function loadFeed() {
             try {
-                const response = await fetchFeedItem();
+                const response = await fetchFeedItem(tipo);
                 SET_PUBS(response);
             } 
             catch (err) {  
@@ -17,13 +18,15 @@ export default function Feed({ navigation }) {
             }
         }
         loadFeed();
-    }, []);
+    }, [tipo]);
 
     return (
         <Container style={{ marginTop: 20, backgroundColor: root.C_WHITE, padding: 20, borderRadius: 10 }}>
-            <Text style={styles.title}>Itens Disponíveis</Text>
-            <ScrollView horizontal={true} bounces={false} showsHorizontalScrollIndicator={false}>
-                {PUBS && PUBS.map((PUB) => (
+            <Text style={styles.title}>
+                {tipo === 0 ? "Para doação" : tipo === 1 ? "Itens À Venda" : tipo === 2 ? "Trocas" : "Itens Disponíveis"}
+            </Text>
+            <ScrollView horizontal bounces={false} showsHorizontalScrollIndicator={false}>
+                {PUBS.map((PUB) => (
                     <ItemCard
                         key={PUB.pub_id}
                         id={PUB.pub_id}
@@ -32,13 +35,11 @@ export default function Feed({ navigation }) {
                         tipoVenda={PUB.pub_tipo}
                         valor={PUB.pub_valor}
                         imagem={PUB.imagem}
-                    >
-                    </ItemCard>
+                    />
                 ))}
             </ScrollView>
-            <Line></Line>
+            <Line />
         </Container>
-
     );
 }
 

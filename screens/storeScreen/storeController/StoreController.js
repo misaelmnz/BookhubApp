@@ -10,8 +10,20 @@ export async function fetchSearchResults(filters) {
     return data.data || [];
 }
 
-export async function fetchFeedItem() {
-    const response = await fetch(`${API_URL}/receberPUBS`);
-    const data = await response.json();
-    return data.data || [];
+export async function fetchFeedItem(tipo = null) {
+    try {
+        let url = `${API_URL}/receberPUBS`;
+        
+        if (tipo !== null) {
+            url += `?tipo=${tipo}`;
+        }
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        return data.data || [];
+    } catch (error) {
+        console.error('Erro ao buscar publicações:', error);
+        return [];
+    }
 }

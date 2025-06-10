@@ -5,7 +5,7 @@ import { Container, Line, root } from '../../../ui/components';
 import HeaderDefault from '../../genericScreen/Header';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SearchBar } from 'react-native-screens';
-import RedirectBar from '../../genericScreen/redirectbar';
+import RedirectBar from '../../genericScreen/RedirectBar';
 import Result from './Result';
 
 export default function ResultScreen({ route, navigation }) {
