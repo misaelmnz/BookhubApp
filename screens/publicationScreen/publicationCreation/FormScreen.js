@@ -277,6 +277,12 @@ export function ScreenFive({goFoward, goBack, form, setForm}) {
 }
 
 export function ScreenSix({goFoward, goBack, form, setForm}) {
+        const [selected, setSelected] = useState(false)
+
+        const cancelImage = () => {
+            setSelected(false)
+            setForm({... form, imagem_caminho: null})
+        }
 
         const pickImage = async () => {
             const result = await ImagePicker.launchImageLibraryAsync({
@@ -287,8 +293,8 @@ export function ScreenSix({goFoward, goBack, form, setForm}) {
             
             if(!result.canceled && result.assets && result.assets.length > 0) {
                 const uri = result.assets[0].uri;
-                const link = await upload(uri);
-                setForm({...form, imagem_caminho: link})
+                setSelected(true)
+                setForm({...form, imagem_caminho: uri})
             } 
     }
 
@@ -298,8 +304,8 @@ export function ScreenSix({goFoward, goBack, form, setForm}) {
         <View style={styles.container}>
             <TitleText Description={"Escolha as imagens da sua publicação"}></TitleText>
             <Text>Priorize fotografar a capa do livro ou apenas a lambada da coleção.</Text>
-            <View style={[styles.spaceSort, {alignSelf: 'center'}]}>
-            <ImageSelector onPress={pickImage}>
+            <View style={[{alignSelf: 'center', marginTop: '10%'}]}>
+            <ImageSelector onPress={pickImage} cancelFunction={cancelImage} selected={selected} form={form}>
             </ImageSelector>
             </View>
         </View>
