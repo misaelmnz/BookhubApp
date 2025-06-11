@@ -110,6 +110,16 @@ export function Cancelar({onPress}) {
     )
 }
 
+export function Confirmar({onPress}) {
+    return (
+        <Pressable onPressOut={onPress} style={({ pressed }) => ({opacity: pressed ? 0.5 : 1,})}>
+            <View style={[styles.border, styles.stepButton]}>
+                <Text style={[styles.textStyle, styles.textStyleWhite]}>Confirmar</Text>
+            </View>
+    </Pressable>
+    )
+}
+
 export function Describe({Title, Describe}) {
     return (
         <View style={{flexDirection: 'column', alignContent: 'center', alignItems: 'flex-start'}}>

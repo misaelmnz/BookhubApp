@@ -12,10 +12,12 @@ import FormScreen, {
     ScreenFour, 
     ScreenTwo, 
     ScreenFive, 
-    ScreenSix } from "./FormScreen";
+    ScreenSix,
+    ScreenFinal } from "./FormScreen";
+import { createPubs, upload } from "../publicationController/PublicationController";
 
 export default function RenderForm({navigation}) {
-    const [selectedGenres, setSelectedGenres] = React.useState([]);
+
     const navigate = useNavigation();
     const [step, setStep] = useState(0);
     const totalStep = 7; // DEPOIS VAI SER CONTADO
@@ -37,6 +39,13 @@ export default function RenderForm({navigation}) {
     pub_id: "",
     genero_id: [], //
     });
+
+    const confirmar = async () => {
+        const link = await upload(form.imagem_caminho);
+        const formFinal = {...form, imagem_caminho: link};
+        const response = await createPubs(form);
+        console.log("RESPOSTA: ", form)
+    }
 
     const goFoward = () => {
         if (step === totalStep) {
@@ -110,6 +119,15 @@ export default function RenderForm({navigation}) {
                     goBack={goBack}
                     form={form}
                     setForm={setForm}></ScreenSix>)
+            case 7: 
+                return (<ScreenFinal goFoward={goFoward}
+                    goBack={goBack}
+                    form={form}
+                    setForm={setForm}
+                    reset={reset}
+                    confirm={confirmar}></ScreenFinal>
+
+                )
             default: 
                     return null;
     }}

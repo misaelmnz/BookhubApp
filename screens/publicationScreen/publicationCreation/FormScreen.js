@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image, Pressable, Text, Alert} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { root } from "../../../ui/components";
-import { Cancelar, Describe, GoBack, GoFoward, ImageSelector, InputBlock, InputButton, InputText, SetDate, TitleText } from "./CreateFormTemplate";
+import { Cancelar, Confirmar, Describe, GoBack, GoFoward, ImageSelector, InputBlock, InputButton, InputText, SetDate, TitleText } from "./CreateFormTemplate";
 import OptionsList from "../../storeScreen/searchScreen/OptionsWrapper";
 import * as ImagePicker from 'expo-image-picker';
 import { upload } from '../publicationController/PublicationController'
@@ -314,6 +314,26 @@ export function ScreenSix({goFoward, goBack, form, setForm}) {
             <GoFoward onPress={goFoward}/>
         </View>
     </View>
+    )
+}
+
+export function ScreenFinal ({form, setForm, goFoward, goBack, reset, confirm}) {
+    return (
+        <View style={styles.formContainer}>
+            <View style={[styles.container, {justifyContent: 'space-between'}]}>
+                <View>
+                    <TitleText Description={"Tudo pronto"}/>
+                    <Text>Clique em Confirmar para publicar seu item ao Público</Text>
+                </View>
+                <View style={{height: '30%', justifyContent: 'space-around' }}>
+                    <Confirmar onPress={confirm}/>
+                    <Cancelar onPress={reset}/>
+                </View>
+            </View> 
+            <View style={styles.stepContainer}>
+
+            </View>
+        </View>
     )
 }
 
