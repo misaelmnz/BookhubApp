@@ -25,10 +25,18 @@ const Iniciar = ({ onPress }) => {
     return(
         <Pressable onPress={onPress}>
             <View style={styles.startButton}>
-                <Text style={styles.startTitle}>Começar</Text>    
+                <Text style={styles.startTitle}>Começar</Text>
             </View>
         </Pressable>
     );
+}
+
+const ImageSpace = ({}) => {
+    return(
+        <View>
+
+        </View>
+    )
 }
 const styles = StyleSheet.create({
 
