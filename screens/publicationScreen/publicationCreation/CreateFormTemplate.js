@@ -1,9 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { StyleSheet, View, Image, Pressable, Text, TextInput} from "react-native";
+import { StyleSheet, View, Image, Pressable, Text, TextInput, Modal} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { root } from "../../../ui/components";
-import DateTimePicker from '@react-native-community/datetimepicker'
+import DateTimePicker from '@react-native-community/datetimepicker';
+import { Entypo } from '@expo/vector-icons';
+
 export function InputBlock({ Description, onPress, selected }) {
     return (
         <Pressable
@@ -30,16 +32,18 @@ export function InputButton({Description, onPress}) {
     )
 }
 
-export function InputText({Description, value, onChange, maxLength=25}) {
+export function InputText({Description, value, onChange, maxLength=25, multiline = false, keyboardType = "default"}) {
     return (
         <View style={[styles.border, styles.inputTextContainer]}>
             <TextInput
-            placeholder={Description}
-            placeholderTextColor={'grey'}
-            value={value}
-            onChangeText={onChange}
-            maxLength={maxLength}
-            style={styles.textStyleGrey}
+                placeholder={Description}
+                placeholderTextColor={'grey'}
+                value={value}
+                onChangeText={onChange}
+                maxLength={maxLength}
+                style={styles.textStyleGrey}
+                multiline={multiline}
+                keyboardType={keyboardType}
             />
         </View>
     )
@@ -115,6 +119,64 @@ export function Describe({Title, Describe}) {
     )
 }
 
+export function ImageSelector({onPress, cancelFunction, selected=false, form}) {
+    const [visible, setVisible] = useState(false)
+    
+    return (
+        <View>
+        {
+            !selected ?
+            <Pressable onPress={onPress} style={styles.containerImagePicker}>
+                <View style={[styles.centralize,{width: '100%', height: '100%'}]}>
+                    <Text style={[styles.textStyle, {marginLeft: 10}]}>Enviar Imagem</Text>
+                    <Entypo name="upload-to-cloud" size={50} color={root.C_BLACK}/>
+                </View>
+
+            </Pressable> :
+
+            <View style={[styles.containerImagePicker, {borderColor: 'green'}]}>
+                <CancelSelection cancelFunction={cancelFunction}/>
+                <Pressable style={[styles.centralize, {width: '100%', height: '100%'}]} onPress={() => setVisible(true)}>
+                <View style={{backgroundColor: '#c8ffc8', borderRadius: '100%', padding: 20}}>
+                    <View style={{backgroundColor: 'green', borderRadius: '100%', padding: 10}}>
+                    <Entypo name="check" size={30} color={root.C_WHITE}/>
+                    </View>
+                </View>
+                </Pressable>
+                <Modal
+                    visible={visible}
+                    transparent={true}
+                    animationType="fade"
+                    onRequestClose={() => setVisible(false)}
+                >
+                    <View
+                    style={styles.modalContainer}
+                    >
+                        <Image style={styles.imageModalContainer} source={{ uri: form.imagem_caminho}}>
+                        </Image>
+                        <Pressable onPress={() => setVisible(false)} style={{ marginTop: 20}}>
+                            <Entypo name="squared-cross" size={20} color={root.C_WHITE}/>
+                        </Pressable>
+                    </View>
+                </Modal>
+            </View>
+        }
+        </View>
+    )
+}
+
+export function CancelSelection({cancelFunction}) {
+    const onPress = cancelFunction;
+    return (
+        <View style={{position: 'absolute', padding: 10}}>
+            <Pressable onPress={onPress} style={({pressed}) => {
+                ({opacity: pressed ? 0.5 : 1,})
+            }}>
+                    <Entypo name="squared-cross" size={40} color='red'/>
+            </Pressable>
+        </View>
+    )
+}
 const styles = StyleSheet.create({
     textStyle: {
         fontFamily: root.C_FONT_LIST.Medium,
@@ -174,7 +236,7 @@ const styles = StyleSheet.create({
 
     inputTextContainer: {
         width: '100%',
-        height: 50,
+        minHeight: 50,
         backgroundColor: root.C_WHITE,
         borderWidth: 3,
         borderColor: root.C_GREY,
@@ -186,7 +248,7 @@ const styles = StyleSheet.create({
     TitleText: {
         alignSelf: 'center',
         fontFamily: root.C_FONT_LIST.Bold,
-        fontSize: 30,
+        fontSize: 28,
         color: root.C_BLACK,
         marginBottom: 10,
     },
@@ -204,5 +266,34 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 5,
         borderRadius: 10,
+    },
+
+    containerImagePicker: {
+        width: '100%',
+        aspectRatio: 1,
+        maxHeight: 300,
+        borderWidth: 4,
+        borderColor: root.C_PURPLE,
+        borderRadius: '10%',
+        borderStyle: 'dotted',
+        backgroundColor: root.C_GREY
+    },
+
+    centralize: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row-reverse'
+    },
+    modalContainer: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    imageModalContainer: {
+        resizeMode: 'contain',
+        width: 300,
+        height: 300,
+        borderRadius: 10
     }
 })
