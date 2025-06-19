@@ -49,8 +49,9 @@ export default function RenderForm({navigation}) {
         }
 
         const formFinal = {...form, imagem_caminho: links};
-        const response = await createPubs(form);
+        const response = await createPubs(formFinal);
         console.log("RESPOSTA: ", form)
+        goFoward()
     }
 
     const goFoward = () => {

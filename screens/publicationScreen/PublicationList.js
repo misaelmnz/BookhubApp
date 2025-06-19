@@ -4,7 +4,6 @@ import PublicationCard from "./PublicationCard";
 import { useNavigation } from "@react-navigation/native";
 import { root } from "../../ui/components";
 import { fetchUserPubs } from "./publicationController/PublicationController";
-import { useAuth } from "../../context/AuthContext";
 
 export default function PublicationList() {
 const navigation = useNavigation();
@@ -23,19 +22,17 @@ useEffect(() => {
 }, []);
 
 return (
-    <View>
+    <View style={{flex: 1}}>
         <FlatList
             data={data}
             keyExtractor={(item) => item.pub_id.toString()}
             contentContainerStyle={{
-                flexGrow: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '100%'
+                paddingVertical: 16,
+                paddingHorizontal: 8,
             }}
             renderItem={({ item }) => (
                 <PublicationCard
-                    imagem={item.imagem_caminho}
+                    imagem={Array.isArray(item.imagem_caminho) ? item.imagem[0] : item.imagem_caminho}
                     title={item.pub_titulo}
                     item_id={item.item_id}
                     pub_id={item.pub_id}

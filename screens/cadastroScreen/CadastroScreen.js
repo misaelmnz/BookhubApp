@@ -17,6 +17,7 @@ import SenhaInput from './SenhaInput';
 import ConfirmarSenhaInput from './ConfirmarSenhaInput';
 import BotaoCadastro from './BotaoCadastro';
 import Logo from './Logo';
+import { handleSubmit as cadastrarUsuario } from './cadastroController/CadastroController';
 
 export default function CadastroScreen({ navigation }) {
   const [form, setForm] = useState({
@@ -112,34 +113,25 @@ export default function CadastroScreen({ navigation }) {
       return;
     }
 
-    try {
-      const response = await fetch('http://192.168.172.166:3000/cadastro', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          user_nome: nomeFormatado,
-          user_sobrenome: sobrenomeFormatado,
-          user_data_nascimento: form.dataNascimento.toISOString().split('T')[0],
-          user_email: form.email,
-          user_celular: form.celular.replace(/\D/g, ''),
-          user_senha: form.senha,
-        }),
-      });
+    const formCadastro = {
+      user_nome: nomeFormatado,
+      user_sobrenome: sobrenomeFormatado,
+      user_data_nascimento: form.dataNascimento.toISOString().split('T')[0],
+      user_email: form.email,
+      user_celular: form.celular.replace(/\D/g, ''),
+      user_senha: form.senha,
+    };
 
-      const data = await response.json();
+    const data = await cadastrarUsuario(formCadastro);
 
-      if (data.success) {
-        Alert.alert('Sucesso', 'Conta criada com sucesso!', [
-          { text: 'Voltar à tela inicial', onPress: () => navigation.navigate('Login') },
-        ]);
-      } else {
-        Alert.alert('Erro', data.message || 'Erro ao criar conta.');
-      }
-    } catch (error) {
-      Alert.alert('Erro', 'Erro ao conectar com o servidor.');
-      console.log(error);
+    if (data.success) {
+      Alert.alert('Sucesso', 'Conta criada com sucesso!', [
+        { text: 'Voltar à tela inicial', onPress: () => navigation.navigate('Login') },
+      ]);
+    } else {
+      Alert.alert('Erro', data.message || 'Erro ao criar conta.');
     }
-  };
+};
 
   return (
     <KeyboardAvoidingView
