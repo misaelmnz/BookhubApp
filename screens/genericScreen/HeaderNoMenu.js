@@ -1,4 +1,7 @@
-import { View, StyleSheet, SafeAreaView, Image, Text } from 'react-native';
+import { View, 
+  StyleSheet,  
+  Image, 
+  Text } from 'react-native';
 import { root } from '../../ui/components';
 
 export default function HeaderDefault() {

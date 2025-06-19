@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+
+import { useState } from 'react';
 import {
-  View,
   ScrollView,
   StyleSheet,
   Text,
@@ -17,8 +17,10 @@ import SenhaInput from './SenhaInput';
 import ConfirmarSenhaInput from './ConfirmarSenhaInput';
 import BotaoCadastro from './BotaoCadastro';
 import Logo from './Logo';
+import { handleSubmit as cadastrarUsuario } from './cadastroController/CadastroController';
 
 export default function CadastroScreen({ navigation }) {
+
   const [form, setForm] = useState({
     nome: '',
     sobrenome: '',
@@ -30,6 +32,7 @@ export default function CadastroScreen({ navigation }) {
   });
 
   const [errorFields, setErrorFields] = useState({});
+
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const DDDsValidos = [
@@ -38,7 +41,7 @@ export default function CadastroScreen({ navigation }) {
     '69', '71', '73', '74', '75', '77', '79', '81', '82', '83', '84', '85', '86', '87', '88', '89', '91', '92', '93', '94', '95',
     '96', '97', '98', '99'
   ];
-
+  
   const formatarNome = (texto) => {
     return texto
       .toLowerCase()
@@ -112,34 +115,25 @@ export default function CadastroScreen({ navigation }) {
       return;
     }
 
-    try {
-      const response = await fetch('http://192.168.15.13:3000/cadastro', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          user_nome: nomeFormatado,
-          user_sobrenome: sobrenomeFormatado,
-          user_data_nascimento: form.dataNascimento.toISOString().split('T')[0],
-          user_email: form.email,
-          user_celular: form.celular.replace(/\D/g, ''),
-          user_senha: form.senha,
-        }),
-      });
+    const formCadastro = {
+      user_nome: nomeFormatado,
+      user_sobrenome: sobrenomeFormatado,
+      user_data_nascimento: form.dataNascimento.toISOString().split('T')[0],
+      user_email: form.email,
+      user_celular: form.celular.replace(/\D/g, ''),
+      user_senha: form.senha,
+    };
 
-      const data = await response.json();
+    const data = await cadastrarUsuario(formCadastro);
 
-      if (data.success) {
-        Alert.alert('Sucesso', 'Conta criada com sucesso!', [
-          { text: 'Voltar à tela inicial', onPress: () => navigation.navigate('Login') },
-        ]);
-      } else {
-        Alert.alert('Erro', data.message || 'Erro ao criar conta.');
-      }
-    } catch (error) {
-      Alert.alert('Erro', 'Erro ao conectar com o servidor.');
-      console.log(error);
+    if (data.success) {
+      Alert.alert('Sucesso', 'Conta criada com sucesso!', [
+        { text: 'Voltar à tela inicial', onPress: () => navigation.navigate('Login') },
+      ]);
+    } else {
+      Alert.alert('Erro', data.message || 'Erro ao criar conta.');
     }
-  };
+};
 
   return (
     <KeyboardAvoidingView

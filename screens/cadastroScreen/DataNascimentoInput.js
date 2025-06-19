@@ -1,5 +1,4 @@
-import React from 'react';
-import { View, Text, Platform, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function DataNascimentoInput({ value, onChange, showDatePicker, setShowDatePicker }) {

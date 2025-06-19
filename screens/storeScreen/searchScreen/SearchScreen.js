@@ -1,11 +1,10 @@
 import React from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, ScrollView} from 'react-native';
 import { root, Container } from '../../../ui/components';
 import OptionsList from './OptionsWrapper';
 import { CheckboxContainer } from './OptionsButton';
 import SearchHeader from './SearchHeader';
 import { fetchSearchResults } from '../storeController/StoreController';
-import { useNavigation } from '@react-navigation/native';
 
 export default function Screen({ navigation }) {
 
@@ -58,45 +57,47 @@ export default function Screen({ navigation }) {
 
 
 return (
-    <Container style={styles.container}>
-            <SearchHeader
-            Search={handleSearchTextSubmit}
-            SearchText={handleSearchTextChange}
-            searchQuery={searchText}
-            />
-            {
-             
-            }
-            <Container style={{padding: 10, backgroundColor: '#fffcf5', borderRadius: 20}}>
-            <Text style={styles.title}>Filtros</Text> 
-                <Text style={styles.subtitle}>Gêneros</Text>
-                    <OptionsList selectedGenres={selectedGenres} toggleGenre={toggleGenre}></OptionsList>
-                <Text style={styles.subtitle}>Coleção</Text>
-                    <Container style={styles.containerColecao}>
-                        {['Coleção', 'Unidade', 'Todos'].map(name => (
-                            <CheckboxContainer
+    <ScrollView >
+        <Container style={styles.container}>
+                <SearchHeader
+                Search={handleSearchTextSubmit}
+                SearchText={handleSearchTextChange}
+                searchQuery={searchText}
+                />
+                {
+                    
+                }
+                <Container style={{padding: 10, backgroundColor: '#fffcf5', borderRadius: 20}}>
+                <Text style={styles.title}>Filtros</Text> 
+                    <Text style={styles.subtitle}>Gêneros</Text>
+                        <OptionsList selectedGenres={selectedGenres} toggleGenre={toggleGenre}></OptionsList>
+                    <Text style={styles.subtitle}>Coleção</Text>
+                        <Container style={styles.containerColecao}>
+                            {['Coleção', 'Unidade', 'Todos'].map(name => (
+                                <CheckboxContainer
                                 key={name}
                                 name={name}
                                 selected={selectedCollection === name}
                                 onSelect={() => selectCollection(name)}
                                 single
-                            />
-                        ))}
-                    </Container>
-                <Text style={styles.subtitle}>Tipo de Publicação</Text>
-                    <Container style={styles.containerColecao}>
-                        {['Venda', 'Doação', 'Troca', 'Todos'].map(name => (
-                            <CheckboxContainer
+                                />
+                            ))}
+                        </Container>
+                    <Text style={styles.subtitle}>Tipo de Publicação</Text>
+                        <Container style={styles.containerColecao}>
+                            {['Venda', 'Doação', 'Troca', 'Todos'].map(name => (
+                                <CheckboxContainer
                                 key={name}
                                 name={name}
                                 selected={selectedPublicationType === name}
                                 onSelect={() => selectPublicationType(name)}
                                 single
-                            />
-                        ))}
-                    </Container>
-            </Container>
-    </Container>
+                                />
+                            ))}
+                        </Container>
+                </Container>
+        </Container>
+    </ScrollView>
     );
 }
 

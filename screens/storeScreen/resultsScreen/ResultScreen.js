@@ -1,10 +1,6 @@
-import React from 'react';
-import { View, StyleSheet, Text, Button} from 'react-native';
-import ResultCard from './ResultCard';
-import { Container, Line, root } from '../../../ui/components';
+import { View, StyleSheet, Text } from 'react-native';
+import { Container, root } from '../../../ui/components';
 import HeaderDefault from '../../genericScreen/Header';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { SearchBar } from 'react-native-screens';
 import RedirectBar from '../../genericScreen/RedirectBar';
 import Result from './Result';
 
@@ -13,7 +9,7 @@ export default function ResultScreen({ route, navigation }) {
     const {searchText, data} = route.params;
 
 return(
-    <View style={{flex: 1, backgroundColor: root.C_WHITE}}>
+    <View style={{flex: 1, backgroundColor: root.C_WHITE, paddingBottom: 150}}>
     <HeaderDefault navigation={navigation}/>
     <Container style={styles.container}>
         <RedirectBar/>

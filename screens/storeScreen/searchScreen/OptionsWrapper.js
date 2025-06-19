@@ -1,17 +1,14 @@
-import React from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
-import { root, TextCustom, Container } from '../../../ui/components';
+import { View, StyleSheet } from 'react-native';
 import OptionButton from './OptionsButton';
 import { useState, useEffect } from 'react';
+import { receberGeneros } from './searchController/SearchController';
 
 export default function OptionsList({selectedGenres, toggleGenre}) {
     const [OPTIONS, SET_OPTIONS] = useState([]);
         useEffect(() => {
             const fetchData = async () => {
                 try {
-                    const response = await fetch('http://192.168.0.2:3000/receberGeneros');
-                    const data = await response.json();
-                    SET_OPTIONS(data.data);
+                    SET_OPTIONS(receberGeneros)
                 } catch (err) {
                     console.error("Erro ao buscar items:", err);
                 }

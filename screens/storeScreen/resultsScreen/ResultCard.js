@@ -1,5 +1,4 @@
-import React from 'react';
-import { StyleSheet, Image, Text, Button } from 'react-native';
+import { StyleSheet, Image, Text } from 'react-native';
 import { CardCustom, Shadow, root, Container, ButtonCustom, Line} from '../../../ui/components';
 import { useNavigation } from '@react-navigation/native';
 
@@ -47,7 +46,7 @@ export default function ResultCard({
                         }
                       }
                   >
-                    <Text style={styles.order}>Fazer pedido</Text>
+                    <Text style={styles.order}>Ver detalhes</Text>
                   </ButtonCustom>
             </Container>
       </CardCustom>

@@ -1,5 +1,7 @@
-import React from 'react';
-import { View, TextInput, StyleSheet, Image, Pressable, Text } from 'react-native';
+import { 
+    StyleSheet,
+    Pressable, 
+    Text } from 'react-native';
 import { root } from '../../ui/components';
 import { useNavigation } from '@react-navigation/native';
 import { Entypo } from '@expo/vector-icons';

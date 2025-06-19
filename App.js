@@ -1,4 +1,3 @@
-import React from 'react';
 import AppNavigator from './navigation/AppNavigator';
 import { StyleSheet } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';

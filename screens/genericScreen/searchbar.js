@@ -1,7 +1,8 @@
-import React from 'react';
-import { View, TextInput, StyleSheet, Image, Pressable } from 'react-native';
+import { 
+    View, 
+    TextInput, 
+    StyleSheet, } from 'react-native';
 import { root } from '../../ui/components';
-import { useNavigation } from '@react-navigation/native';
 import { Entypo } from '@expo/vector-icons';
 
 export const Lupa = () => {

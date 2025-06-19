@@ -14,7 +14,7 @@ export async function fetchUserPubs () {
     }
 }
 
-export async function createPubs (form) {
+export async function createPubs (form) { // Não finalizada
     try {
         const token = await getToken();
         const response = await axios.post(`${API_URL}/criarPub`,form,{headers: {Authorization: `User ${token}`}})
@@ -24,7 +24,7 @@ export async function createPubs (form) {
     } 
 }
 
-export async function updatePubs () {
+export async function updatePubs () { // Não finalizada
     try {
 
     } catch(err) {
@@ -32,7 +32,7 @@ export async function updatePubs () {
     }
 }
 
-export async function deletePub (item_id) {
+export async function deletePub (item_id) { // Não finalizada
     try {
         const token = await getToken();
         const response = await axios.delete(`${API_URL}/deletePubs`, 
@@ -45,7 +45,7 @@ export async function deletePub (item_id) {
     }
 }
 
-export async function verifyPub (pub_id) {
+export async function verifyPub (pub_id) { 
     try {
         const response = await axios.post(`${API_URL}/verifyPub`,
             {pub_id: pub_id});

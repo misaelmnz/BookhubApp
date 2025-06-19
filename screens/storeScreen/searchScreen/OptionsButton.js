@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
-import { View, StyleSheet, Text, Button, TouchableOpacity, Image } from 'react-native';
-import { root, TextCustom, Container } from '../../../ui/components';
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { root } from '../../../ui/components';
 
 
 export default function OptionButton ({genreName, genreId, selected, onPress}) {

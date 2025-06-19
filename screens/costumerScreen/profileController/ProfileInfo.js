@@ -1,4 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
+import { 
+    StyleSheet, 
+    Text, 
+    View } from "react-native";
 import { root } from "../../../ui/components";
 
 export default function InfoBar({label, value}) {

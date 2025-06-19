@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   View, SafeAreaView, Text, Image, Modal, StyleSheet,
   TouchableOpacity, ScrollView, Linking, FlatList, Dimensions

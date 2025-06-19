@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import HeaderDefault from "../genericScreen/Header";
-import { StyleSheet, View, Image, Pressable, Text, TextInput, Modal} from "react-native";
+import { 
+    StyleSheet, 
+    View, 
+    Pressable, 
+    Text} from "react-native";
 import { mostrarUser } from "./profileController/ProfileController";
 import { root } from "../../ui/components";
 import InfoBar from "./profileController/ProfileInfo";

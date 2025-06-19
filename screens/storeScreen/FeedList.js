@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { ScrollView, Alert, StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet, Text } from 'react-native';
 import ItemCard from './ItemCard';
-import { Container, Line, root, TextCustom } from '../../ui/components';
+import { Container, Line, root } from '../../ui/components';
 import { fetchFeedItem } from './storeController/StoreController'
 
 export default function Feed({ navigation, tipo }) {
@@ -23,7 +23,7 @@ export default function Feed({ navigation, tipo }) {
     return (
         <Container style={{ marginTop: 20, backgroundColor: root.C_WHITE, padding: 20, borderRadius: 10 }}>
             <Text style={styles.title}>
-                {tipo === 0 ? "Para doação" : tipo === 1 ? "Itens À Venda" : tipo === 2 ? "Trocas" : "Itens Disponíveis"}
+                {tipo === 0 ? "Doações" : tipo === 1 ? "À Venda" : tipo === 2 ? "Trocas" : "Itens Disponíveis"}
             </Text>
             <ScrollView horizontal bounces={false} showsHorizontalScrollIndicator={false}>
                 {PUBS.map((PUB) => (
