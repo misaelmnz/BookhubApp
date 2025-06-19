@@ -10,27 +10,27 @@ export const MenuOption = ({onPress, Texto, name, style}) => {
     return(
         <TouchableOpacity onPress={onPress} style={{ marginLeft: 8 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Entypo name={name} size={24} color="black"/>
-                <Text style={styles.menuItem}>{Texto}</Text>
-            </View>
-        </TouchableOpacity>
-    )
-}
+                    <Entypo name={name} size={24} color="black"/>
+                    <Text style={styles.menuItem}>{Texto}</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
 
-const logoutAlert = (setVisible, logout, navigate) => {
-    Alert.alert('Logout', 'Tem certeza que deseja sair?', [
-        { 
-            text: 'Cancelar',
-        },
-        
-        {
-            text: 'Sim',
-            onPress: () => {
-                try {
-                setVisible(false);
-                logout();
-                navigate.reset({index: 0, routes: [{name: 'Login'}]})
-            } catch (err) {
+    const logoutAlert = (setVisible, logout, navigate) => {
+        Alert.alert('Logout', 'Tem certeza que deseja sair?', [
+            { 
+                text: 'Cancelar',
+            },
+            
+            {
+                text: 'Sim',
+                onPress: () => {
+                    try {
+                    setVisible(false);
+                    logout();
+                    navigate.reset({index: 0, routes: [{name: 'Login'}]})
+                } catch (err) {
                 console.log(err)    
         }}
 }])}
@@ -56,7 +56,7 @@ export default function Menu() {
                 <View style={styles.menuContainer}>
                     <View style={styles.menuBox}>
                         <MenuOption onPress={()=> {
-                            navigate.navigate('Perfil de Usuário')
+                            navigate.navigate('Profile')
                         }} 
                         style={styles.menuItem} Texto={'Perfil de Usuário'} name={'user'}/>
 
@@ -67,6 +67,11 @@ export default function Menu() {
 
                         <MenuOption onPress={() => logoutAlert(setVisible, logout, navigate)}
                          style={styles.menuItem} Texto={'Sair'} name={'log-out'}/>
+
+                        <MenuOption onPress={() => {
+                            navigate.reset({index: 1, routes: [{ name: 'Feed' }]})
+                        }}
+                        style={styles.menuItem} Texto={'Feed'} name={'home'}/>
                     </View>
                 </View>
             </TouchableOpacity>

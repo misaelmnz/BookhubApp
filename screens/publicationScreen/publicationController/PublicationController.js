@@ -14,12 +14,14 @@ export async function fetchUserPubs () {
     }
 }
 
-export async function createPubs () {
+export async function createPubs (form) {
     try {
-        
+        const token = await getToken();
+        const response = await axios.post(`${API_URL}/criarPub`,form,{headers: {Authorization: `User ${token}`}})
+        return response.data;
     } catch(err) {
         console.log(err)
-    }
+    } 
 }
 
 export async function updatePubs () {

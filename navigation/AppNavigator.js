@@ -11,6 +11,8 @@ import PublicationMain from '../screens/publicationScreen/PubScreen';
 import { useAuth } from '../context/AuthContext';
 import CreateScreen from '../screens/publicationScreen/publicationCreation/CreateScreen';
 import RenderForm from '../screens/publicationScreen/publicationCreation/RenderForm';
+import Profile from '../screens/costumerScreen/ProfileScreen';
+
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
@@ -27,6 +29,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Publicação" component={PublicationMain} options={{ headerShown: false}}/>
         <Stack.Screen name="Criar Publicação" component={CreateScreen} options={{ headerShown: false}}/>
         <Stack.Screen name="RenderForm" component={RenderForm}/>
+        <Stack.Screen name="Profile" component={Profile} options={{ headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -12,10 +12,12 @@ import FormScreen, {
     ScreenFour, 
     ScreenTwo, 
     ScreenFive, 
-    ScreenSix } from "./FormScreen";
+    ScreenSix,
+    ScreenFinal } from "./FormScreen";
+import { createPubs, upload } from "../publicationController/PublicationController";
 
 export default function RenderForm({navigation}) {
-    const [selectedGenres, setSelectedGenres] = React.useState([]);
+
     const navigate = useNavigation();
     const [step, setStep] = useState(0);
     const totalStep = 7; // DEPOIS VAI SER CONTADO
@@ -28,7 +30,7 @@ export default function RenderForm({navigation}) {
     item_status: "", //
     item_tipo: "",   //
     item_id: "",     //
-    imagem_caminho: "", 
+    imagem_caminho: [], 
     pub_tipo: "",   //
     pub_titulo: "", //
     pub_valor: "",  //
@@ -37,6 +39,19 @@ export default function RenderForm({navigation}) {
     pub_id: "",
     genero_id: [], //
     });
+
+    const confirmar = async () => {
+
+        const links = [];
+        for (let uri of form.imagem_caminho) {
+            const link = await upload(uri);
+            links.push(link);
+        }
+
+        const formFinal = {...form, imagem_caminho: links};
+        const response = await createPubs(form);
+        console.log("RESPOSTA: ", form)
+    }
 
     const goFoward = () => {
         if (step === totalStep) {
@@ -61,41 +76,30 @@ export default function RenderForm({navigation}) {
         return navigate.navigate('Publicação')
     }
 
-    /* Lógica do Render
-        Que tipo de item deseja publicar?
-        1. Coleção ou Livro?
-        2. Escreva o nome da coleção ou livro?
-        3. Escreva o nome do autor
-        4. Escreva o código isbn
-        5. Escreva o nome da editora
-        6. Quando foi publicado?
-        7. Qual o estado de conservação?
-        ...
-    */
     function renderStep() {
         switch (step) {
-            case 0: // -- Set item_tipo (Coleção ou Livro?)
+            case 0: 
                 return (<ScreenZero goFoward={goFoward} 
                     goBack={goBack} 
                     form={form} 
                     setForm={setForm} ></ScreenZero>)
-            case 1: // -- Set item (Todas as informações sobre item) 
+            case 1: 
                 return (<ScreenOne goFoward={goFoward} 
                     goBack={goBack} 
                     form={form} 
                     setForm={setForm}></ScreenOne>)
-            case 2: // -- Mostrar as informações escritas até agora sobre o livro
+            case 2: 
                 return (<ScreenTwo goFoward={goFoward} 
                     goBack={goBack}
                     form={form} 
                     setForm={setForm}
                     reset={reset}></ScreenTwo>)
-            case 3: // -- Set pub tipo (Venda, Troca, Doação)
+            case 3: 
                 return (<ScreenThree goFoward={goFoward} 
                     goBack={goBack} 
                     form={form} 
                     setForm={setForm}></ScreenThree>)
-            case 4: // -- Set pub tipo (Venda, Troca, Doação) 
+            case 4: 
                 return (<ScreenFour goFoward={goFoward} 
                     goBack={goBack} 
                     form={form} 
@@ -110,6 +114,15 @@ export default function RenderForm({navigation}) {
                     goBack={goBack}
                     form={form}
                     setForm={setForm}></ScreenSix>)
+            case 7: 
+                return (<ScreenFinal goFoward={goFoward}
+                    goBack={goBack}
+                    form={form}
+                    setForm={setForm}
+                    reset={reset}
+                    confirm={confirmar}></ScreenFinal>
+
+                )
             default: 
                     return null;
     }}
