@@ -287,14 +287,15 @@ export function ScreenSix({goFoward, goBack, form, setForm}) {
         const pickImage = async () => {
             const result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ['images'],
-                quality: 1,
+                allowsMultipleSelection: true,
+                quality: 0,
                 allowsEditing: true,
             });
             
             if(!result.canceled && result.assets && result.assets.length > 0) {
-                const uri = result.assets[0].uri;
-                setSelected(true)
-                setForm({...form, imagem_caminho: uri})
+                const uris = result.assets.map(assets => assets.uri);
+                setForm({ ...form, imagem_caminho: [... form.imagem_caminho, ...uris]})
+                
             } 
     }
 

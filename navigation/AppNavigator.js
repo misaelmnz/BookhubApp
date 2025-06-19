@@ -11,7 +11,7 @@ import PublicationMain from '../screens/publicationScreen/PubScreen';
 import { useAuth } from '../context/AuthContext';
 import CreateScreen from '../screens/publicationScreen/publicationCreation/CreateScreen';
 import RenderForm from '../screens/publicationScreen/publicationCreation/RenderForm';
-import Profile from '../screens/profileScreen/ProfileScreen';
+import Profile from '../screens/costumerScreen/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
